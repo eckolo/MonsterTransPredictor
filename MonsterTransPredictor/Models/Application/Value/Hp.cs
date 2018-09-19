@@ -27,8 +27,8 @@ namespace MonsterTransPredictor.Models.Application.Value
         public static Hp operator *(Hp x, Hp y) => new Hp(x.real * y.real);
         public static Hp operator /(Hp x, Hp y) => new Hp(x.real / y.real);
 
-        public static bool operator ==(Hp x, Hp y) => x.Equals(y);
-        public static bool operator !=(Hp x, Hp y) => !x.Equals(y);
+        public static bool operator ==(Hp x, Hp y) => x?.Equals(y) ?? y is null;
+        public static bool operator !=(Hp x, Hp y) => !(x == y);
 
         public static bool operator <(Hp x, Hp y) => x.CompareTo(y) < 0;
         public static bool operator >(Hp x, Hp y) => x.CompareTo(y) > 0;

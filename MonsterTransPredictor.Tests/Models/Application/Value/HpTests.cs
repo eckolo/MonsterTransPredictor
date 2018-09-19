@@ -124,19 +124,72 @@ namespace MonsterTransPredictor.Models.Application.Value.Tests
         }
 
         [TestMethod()]
-        public void EqualsTest_正常系_同クラス()
+        public void EqualsTest_正常系_同クラス_メソッド()
         {
             Assert.IsTrue(large.Equals(large));
             Assert.IsFalse(large.Equals(small));
             Assert.IsFalse(large.Equals(small2));
+            Assert.IsFalse(large.Equals(nullValue));
 
             Assert.IsFalse(small.Equals(large));
             Assert.IsTrue(small.Equals(small));
             Assert.IsTrue(small.Equals(small2));
+            Assert.IsFalse(small.Equals(nullValue));
 
             Assert.IsFalse(small2.Equals(large));
             Assert.IsTrue(small2.Equals(small));
             Assert.IsTrue(small2.Equals(small2));
+            Assert.IsFalse(small2.Equals(nullValue));
+        }
+        [TestMethod()]
+        public void EqualsTest_正常系_同クラス_演算子_同値()
+        {
+#pragma warning disable CS1718 // 同じ変数との比較もテストする
+            Assert.IsTrue(large == large);
+            Assert.IsFalse(large == small);
+            Assert.IsFalse(large == small2);
+            Assert.IsFalse(large == nullValue);
+
+            Assert.IsFalse(small == large);
+            Assert.IsTrue(small == small);
+            Assert.IsTrue(small == small2);
+            Assert.IsFalse(small == nullValue);
+
+            Assert.IsFalse(small2 == large);
+            Assert.IsTrue(small2 == small);
+            Assert.IsTrue(small2 == small2);
+            Assert.IsFalse(small2 == nullValue);
+
+            Assert.IsFalse(nullValue == large);
+            Assert.IsFalse(nullValue == small);
+            Assert.IsFalse(nullValue == small2);
+            Assert.IsTrue(nullValue == nullValue);
+#pragma warning restore CS1718 // 同じ変数との比較もテストする
+        }
+        [TestMethod()]
+        public void EqualsTest_正常系_同クラス_演算子_非同値()
+        {
+#pragma warning disable CS1718 // 同じ変数との比較もテストする
+            Assert.IsFalse(large != large);
+            Assert.IsTrue(large != small);
+            Assert.IsTrue(large != small2);
+            Assert.IsTrue(large != nullValue);
+
+            Assert.IsTrue(small != large);
+            Assert.IsFalse(small != small);
+            Assert.IsFalse(small != small2);
+            Assert.IsTrue(small != nullValue);
+
+            Assert.IsTrue(small2 != large);
+            Assert.IsFalse(small2 != small);
+            Assert.IsFalse(small2 != small2);
+            Assert.IsTrue(small2 != nullValue);
+
+            Assert.IsTrue(nullValue != large);
+            Assert.IsTrue(nullValue != small);
+            Assert.IsTrue(nullValue != small2);
+            Assert.IsFalse(nullValue != nullValue);
+#pragma warning restore CS1718 // 同じ変数との比較もテストする
         }
 
         [TestMethod()]
