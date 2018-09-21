@@ -10,11 +10,11 @@ namespace MonsterTransPredictor.Models.Application.Value
         /// <summary>
         /// 習得可能技一覧
         /// </summary>
-        List<Skill> learnableSkillList { get; }
+        public List<Skill> learnableSkillList { get; }
 
         /// <summary>
         /// 変身条件一覧
         /// </summary>
-        List<TransTerm> transTermList { get; }
+        public List<TransTerm> transTermList { get; }
     }
 }

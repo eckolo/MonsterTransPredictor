@@ -8,6 +8,6 @@
         /// <summary>
         /// 分類される部位タイプ
         /// </summary>
-        PartsType partsType { get; }
+        public PartsType partsType { get; }
     }
 }
