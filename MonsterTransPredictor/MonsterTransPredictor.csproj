@@ -165,7 +165,6 @@
     <Compile Include="Migrations\201809221524218_Initial.Designer.cs">
       <DependentUpon>201809221524218_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\AddProperty.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Application\Service\StatusCalculator.cs" />
     <Compile Include="Models\Application\Value\Hp.cs" />
@@ -174,7 +173,6 @@
     <Compile Include="Models\Application\Value\Monster.TransTerm.cs" />
     <Compile Include="Models\Application\Value\PartsType.cs" />
     <Compile Include="Models\Application\Value\Skill.cs" />
-    <Compile Include="Models\Application\Entity\Status.cs" />
     <Compile Include="Models\Infrastructure\Mtp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
