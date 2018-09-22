@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MonsterTransPredictor.Models.Application.Value
 {
@@ -7,16 +8,29 @@ namespace MonsterTransPredictor.Models.Application.Value
         /// <summary>
         /// 変身条件
         /// </summary>
-        public class TransTerm
+        public partial class TransTerm
         {
+            /// <summary>
+            /// 主キー
+            /// </summary>
+            [Key]
+            public int id { get; private set; }
+
             /// <summary>
             /// 体力条件
             /// </summary>
-            public Hp hpLimit { get; }
+            public Hp hpLimit => new Hp(_hpLimit);
+            /// <summary>
+            /// 体力条件
+            /// </summary>
+            [Required]
+            protected int _hpLimit { get; private set; }
+
             /// <summary>
             /// 必要スキル条件
             /// </summary>
-            public List<Skill> necessarySkillList { get; }
+            [Required]
+            public List<Skill> necessarySkillList { get; private set; }
         }
     }
 }
