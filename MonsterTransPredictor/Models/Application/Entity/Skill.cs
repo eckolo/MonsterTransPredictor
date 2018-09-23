@@ -1,8 +1,9 @@
-﻿using System;
+﻿using MonsterTransPredictor.Models.Application.Value;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MonsterTransPredictor.Models.Application.Value
+namespace MonsterTransPredictor.Models.Application.Entity
 {
     /// <summary>
     /// 技を表すオブジェクト

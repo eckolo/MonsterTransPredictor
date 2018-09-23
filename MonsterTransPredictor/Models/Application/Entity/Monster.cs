@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MonsterTransPredictor.Models.Application.Value
+namespace MonsterTransPredictor.Models.Application.Entity
 {
     /// <summary>
     /// 敵味方関わらずモンスターを表現するクラス

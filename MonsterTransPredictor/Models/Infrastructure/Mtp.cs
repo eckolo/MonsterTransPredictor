@@ -1,6 +1,6 @@
 ﻿namespace MonsterTransPredictor.Models.Infrastructure
 {
-    using MonsterTransPredictor.Models.Application.Value;
+    using MonsterTransPredictor.Models.Application.Entity;
     using System.Data.Entity;
 
     public class Mtp : DbContext

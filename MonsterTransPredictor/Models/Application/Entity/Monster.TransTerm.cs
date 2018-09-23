@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using MonsterTransPredictor.Models.Application.Value;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MonsterTransPredictor.Models.Application.Value
+namespace MonsterTransPredictor.Models.Application.Entity
 {
     public partial class Monster
     {

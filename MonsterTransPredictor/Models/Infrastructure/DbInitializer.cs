@@ -1,4 +1,5 @@
-﻿using MonsterTransPredictor.Models.Application.Value;
+﻿using MonsterTransPredictor.Models.Application.Entity;
+using MonsterTransPredictor.Models.Application.Value;
 using System.Collections.Generic;
 using System.Linq;
 

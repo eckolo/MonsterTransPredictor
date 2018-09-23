@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 
-namespace MonsterTransPredictor.Models.Application.Value
+namespace MonsterTransPredictor.Models.Application.Entity
 {
     public partial class Monster
     {
