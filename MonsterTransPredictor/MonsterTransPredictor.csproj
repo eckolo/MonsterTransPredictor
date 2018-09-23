@@ -231,6 +231,8 @@
     <Content Include="Views\Predict\Index.cshtml" />
     <Content Include="Views\Predict\_Layout.cshtml" />
     <Content Include="Views\Predict\_ViewStart.cshtml" />
+    <Content Include="Views\Predict\SkillSearch.cshtml" />
+    <Content Include="Views\Predict\MonsterSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
