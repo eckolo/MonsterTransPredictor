@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MonsterTransPredictor.Models.Application.Value
@@ -8,6 +9,14 @@ namespace MonsterTransPredictor.Models.Application.Value
     /// </summary>
     public partial class Skill
     {
+        public Skill() { }
+
+        public Skill(string name, PartsType partsType)
+        {
+            this.name = name ?? throw new ArgumentNullException(nameof(name));
+            this.partsType = partsType;
+        }
+
         /// <summary>
         /// 主キー
         /// </summary>
@@ -31,10 +40,23 @@ namespace MonsterTransPredictor.Models.Application.Value
         [Required]
         public List<Monster> learnableMonsterList { get; private set; }
 
+        public Skill AddLearnableMonster(Monster monster)
+        {
+            learnableMonsterList = learnableMonsterList ?? new List<Monster>();
+            learnableMonsterList.Add(monster);
+            return this;
+        }
+
         /// <summary>
         /// 必要スキルとして含まれる条件リスト
         /// </summary>
-        [Required]
         public List<Monster.TransTerm> necessaryTransTermList { get; private set; }
+
+        public Skill AddnecessaryTransTerm(Monster.TransTerm transTerm)
+        {
+            necessaryTransTermList = necessaryTransTermList ?? new List<Monster.TransTerm>();
+            necessaryTransTermList.Add(transTerm);
+            return this;
+        }
     }
 }

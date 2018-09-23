@@ -10,6 +10,13 @@ namespace MonsterTransPredictor.Models.Application.Value
         /// </summary>
         public partial class TransTerm
         {
+            public TransTerm() { }
+
+            public TransTerm(int hpLimit)
+            {
+                _hpLimit = hpLimit;
+            }
+
             /// <summary>
             /// 主キー
             /// </summary>
@@ -31,6 +38,13 @@ namespace MonsterTransPredictor.Models.Application.Value
             /// </summary>
             [Required]
             public List<Skill> necessarySkillList { get; private set; }
+
+            public TransTerm AddNecessarySkill(Skill skill)
+            {
+                necessarySkillList = necessarySkillList ?? new List<Skill>();
+                necessarySkillList.Add(skill.AddnecessaryTransTerm(this));
+                return this;
+            }
         }
     }
 }
