@@ -177,6 +177,8 @@
       <DependentUpon>201809221524218_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Application\Repository\IMonsterRepository.cs" />
+    <Compile Include="Models\Application\Repository\ISkillRepository.cs" />
     <Compile Include="Models\Application\Service\StatusCalculator.cs" />
     <Compile Include="Models\Application\Value\Hp.cs" />
     <Compile Include="Models\Application\Entity\Monster.cs" />
@@ -236,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Infrastructure\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
