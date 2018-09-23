@@ -12,7 +12,7 @@ namespace MonsterTransPredictor.Controllers
         {
             using(var mtp = new Mtp())
             {
-                DbInitializer.initialize(mtp);
+                DbInitializer.Initialize(mtp);
             }
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

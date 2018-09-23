@@ -7,7 +7,7 @@ namespace MonsterTransPredictor.Models.Infrastructure
 {
     public class DbInitializer
     {
-        public static void initialize(Mtp context)
+        public static void Initialize(Mtp context)
         {
             //初期化前にデータを全削除
             context.monsters.RemoveRange(context.monsters.ToList());
