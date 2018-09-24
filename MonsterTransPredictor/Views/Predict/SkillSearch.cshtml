@@ -4,7 +4,7 @@
 }
 
 <div class="row">
-    @using(Html.BeginForm("SkillSearch", "Predict", FormMethod.Post, new { @class = "panel panel-info" }))
+    @using(Html.BeginForm("SkillSearch", "Predict", FormMethod.Post, new { @class = "panel panel-info col-md-4" }))
     {
         <div class="panel-heading lead">習得済みの技</div>
         <p class="help-block">※ドラッグ＆ドロップで順番変更可能</p>
@@ -24,4 +24,20 @@
             <button type="submit" class="btn btn-primary btn-lg">検索</button>
         </div>
     }
+    <div class="panel panel-info col-md-8">
+        <div class="panel-heading lead">予測結果</div>
+        <table class="table">
+            <tr>
+                <td nowrap>HP条件/習得技</td>
+                <th nowrap>@Model.addSkillName</th>
+            </tr>
+            @foreach(var monster in Model.resultMonsterNames)
+            {
+                <tr>
+                    <th nowrap>@monster.hp</th>
+                    <td nowrap>@monster.name</td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>

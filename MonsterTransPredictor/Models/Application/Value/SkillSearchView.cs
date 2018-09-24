@@ -38,8 +38,20 @@ namespace MonsterTransPredictor.Models.Application.Value
         /// </summary>
         public int addSkillId { get; } = 0;
         /// <summary>
+        /// 追加技の名称
+        /// </summary>
+        public string addSkillName
+            => _skillNameList.ContainsKey(addSkillId)
+            ? _skillNameList[addSkillId]
+            : "";
+        /// <summary>
         /// 追加技のデフォルト選択ID
         /// </summary>
         public List<int> masteredSkillIdList { get; } = Enumerable.Range(0, 8).Select(_ => 0).ToList();
+
+        /// <summary>
+        /// 予測結果
+        /// </summary>
+        public List<(int hp, string name)> resultMonsterNames { get; } = new List<(int hp, string name)>();
     }
 }
