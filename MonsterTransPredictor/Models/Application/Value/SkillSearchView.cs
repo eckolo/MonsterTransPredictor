@@ -10,11 +10,12 @@ namespace MonsterTransPredictor.Models.Application.Value
     /// </summary>
     public class SkillSearchView
     {
-        public SkillSearchView(Dictionary<int, string> skillNameList, int? addSkillIdDefault = null, List<int> masteredSkillIdDefault = null)
+        public SkillSearchView(Dictionary<int, string> skillNameList, int? addSkillId = null, List<int?> masteredSkillIdList = null)
         {
             _skillNameList = skillNameList ?? throw new ArgumentNullException(nameof(skillNameList));
-            this.addSkillIdDefault = addSkillIdDefault ?? this.addSkillIdDefault;
-            this.masteredSkillIdDefault = masteredSkillIdDefault ?? this.masteredSkillIdDefault;
+            this.addSkillId = addSkillId ?? this.addSkillId;
+            this.masteredSkillIdList = masteredSkillIdList?.Select(id => id ?? 0).ToList()
+                ?? this.masteredSkillIdList;
         }
 
         /// <summary>
@@ -34,10 +35,10 @@ namespace MonsterTransPredictor.Models.Application.Value
         /// <summary>
         /// 追加技のデフォルト選択ID
         /// </summary>
-        public int addSkillIdDefault { get; } = 0;
+        public int addSkillId { get; } = 0;
         /// <summary>
         /// 追加技のデフォルト選択ID
         /// </summary>
-        public List<int> masteredSkillIdDefault { get; } = Enumerable.Range(0, 8).Select(_ => 0).ToList();
+        public List<int> masteredSkillIdList { get; } = Enumerable.Range(0, 8).Select(_ => 0).ToList();
     }
 }
