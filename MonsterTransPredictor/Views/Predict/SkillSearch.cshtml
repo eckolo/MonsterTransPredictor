@@ -1,3 +1,23 @@
-﻿@{
+﻿@model MonsterTransPredictor.Models.Application.Value.SkillSearchView
+@{
     ViewBag.Title = "Skill Search";
 }
+
+<div class="row">
+    <div class="panel panel-info">
+        <div class="panel-heading lead">習得済みの技</div>
+        <p class="help-block">※ドラッグ＆ドロップで順番変更可能</p>
+        <ul class="list-group sortable">
+            @foreach(var skill in Model.masteredSkillIdDefault)
+            {
+                <li class="list-group-item">
+                    @Html.DropDownListFor(_ => skill, Model.skillNameList, new { @class = "form-control" })
+                </li>
+            }
+        </ul>
+        <div class="panel-heading lead">新規習得技</div>
+        <div class="panel-body">
+            @Html.DropDownListFor(Model => Model.addSkillIdDefault, Model.skillNameList, new { @class = "form-control" })
+        </div>
+    </div>
+</div>

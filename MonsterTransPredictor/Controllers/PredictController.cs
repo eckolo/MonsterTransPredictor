@@ -1,4 +1,6 @@
 ﻿using MonsterTransPredictor.Models.Application.Repository;
+using MonsterTransPredictor.Models.Application.Value;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace MonsterTransPredictor.Controllers
@@ -28,7 +30,7 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult SkillSearch()
         {
-            return View();
+            return View(new SkillSearchView(skillNameList: new Dictionary<int, string> { { 1, "test1" }, { 2, "test2" } }));
         }
         /// <summary>
         /// モンスターによる変身先予測
