@@ -27,7 +27,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
         /// </summary>
         /// <param name="ids">IDのリスト</param>
         /// <returns>技情報一覧</returns>
-        IEnumerable<Skill> ISkillRepository.GetMonster(IEnumerable<int> ids)
+        IEnumerable<Skill> ISkillRepository.GetSkill(IEnumerable<int> ids)
         {
             throw new NotImplementedException();
         }

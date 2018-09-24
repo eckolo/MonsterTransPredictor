@@ -1,7 +1,9 @@
 ﻿using MonsterTransPredictor.Models.Application.Repository;
+using MonsterTransPredictor.Models.Application.Service;
 using MonsterTransPredictor.Models.Application.Value;
 using MonsterTransPredictor.Models.Infrastructure.Repository;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace MonsterTransPredictor.Controllers
@@ -35,6 +37,14 @@ namespace MonsterTransPredictor.Controllers
         {
             var skillNameList = skillRepository.GetAllNameList();
             var viewModel = new SkillSearchView(skillNameList, addSkillId, masteredSkillIdList);
+
+            var skillIdList = masteredSkillIdList.Concat(new List<int?> { addSkillId }).ToIdList();
+            var skillList = skillRepository.GetSkill(skillIdList);
+
+            var masteredSkillList = masteredSkillIdList.GetSkillDetail(skillList);
+            var addSkill = addSkillId.GetSkillDetail(skillList);
+
+            var nextMonster = masteredSkillList?.CalcNextMonster(addSkill);
 
             return View(viewModel);
         }

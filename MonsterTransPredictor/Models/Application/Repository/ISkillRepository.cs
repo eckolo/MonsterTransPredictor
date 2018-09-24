@@ -19,6 +19,6 @@ namespace MonsterTransPredictor.Models.Application.Repository
         /// </summary>
         /// <param name="ids">IDのリスト</param>
         /// <returns>技情報一覧</returns>
-        IEnumerable<Skill> GetMonster(IEnumerable<int> ids);
+        IEnumerable<Skill> GetSkill(IEnumerable<int> ids);
     }
 }
