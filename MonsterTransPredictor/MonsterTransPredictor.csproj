@@ -190,6 +190,7 @@
     <Compile Include="Models\Infrastructure\DbInitializer.cs" />
     <Compile Include="Models\Infrastructure\Mtp.cs" />
     <Compile Include="Models\Infrastructure\Repository\MtpRepository.cs" />
+    <Compile Include="Models\Infrastructure\Repository\SkillRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

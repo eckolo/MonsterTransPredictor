@@ -11,11 +11,11 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
         /// <summary>
         /// エンティティの実体
         /// </summary>
-        static Mtp _mtp = null;
+        static Mtp _entity = null;
         /// <summary>
         /// エンティティ取得インターフェース
         /// </summary>
-        public static Mtp mtp => _mtp ?? (_mtp = new Mtp().SetLog());
+        public static Mtp entity => _entity ?? (_entity = new Mtp().SetLog());
 
         /// <summary>
         /// DBアクセスログをコンソールに吐き出すための処理

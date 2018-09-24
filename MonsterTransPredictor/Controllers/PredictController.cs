@@ -1,5 +1,6 @@
 ﻿using MonsterTransPredictor.Models.Application.Repository;
 using MonsterTransPredictor.Models.Application.Value;
+using MonsterTransPredictor.Models.Infrastructure.Repository;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -14,7 +15,7 @@ namespace MonsterTransPredictor.Controllers
         /// <summary>
         /// 技情報リポジトリ
         /// </summary>
-        readonly ISkillRepository skillRepository;
+        readonly ISkillRepository skillRepository = new SkillRepository();
 
         /// <summary>
         /// トップページ兼メインメニュー
@@ -27,10 +28,15 @@ namespace MonsterTransPredictor.Controllers
         /// <summary>
         /// 技による変身先予測
         /// </summary>
+        /// <param name="masteredSkillIdList">習得済み技IDリスト</param>
+        /// <param name="addSkillId">新規習得技ID</param>
         /// <returns>HTMLページ</returns>
-        public ActionResult SkillSearch()
+        public ActionResult SkillSearch(List<int?> masteredSkillIdList = null, int? addSkillId = null)
         {
-            return View(new SkillSearchView(skillNameList: new Dictionary<int, string> { { 1, "test1" }, { 2, "test2" } }));
+            var skillNameList = skillRepository.GetAllNameList();
+            var viewModel = new SkillSearchView(skillNameList, addSkillId, masteredSkillIdList);
+
+            return View(viewModel);
         }
         /// <summary>
         /// モンスターによる変身先予測

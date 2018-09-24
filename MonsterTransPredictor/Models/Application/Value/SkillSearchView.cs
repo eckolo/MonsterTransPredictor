@@ -28,7 +28,8 @@ namespace MonsterTransPredictor.Models.Application.Value
         public SelectListItem[] skillNameList
             => _skillNameList
             .Concat(new Dictionary<int, string> { { 0, "" } })
-            .OrderBy(name => name.Key)
+            .OrderBy(name => name.Value)
+            .ThenBy(name => name.Key)
             .Select(name => new SelectListItem { Value = name.Key.ToString(), Text = name.Value })
             .ToArray();
 
