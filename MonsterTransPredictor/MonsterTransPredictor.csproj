@@ -189,6 +189,7 @@
     <Compile Include="Models\Application\Value\SkillSearchView.cs" />
     <Compile Include="Models\Infrastructure\DbInitializer.cs" />
     <Compile Include="Models\Infrastructure\Mtp.cs" />
+    <Compile Include="Models\Infrastructure\Repository\MtpRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -248,7 +249,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Infrastructure\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
