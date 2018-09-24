@@ -17,18 +17,16 @@ namespace MonsterTransPredictor.Models.Infrastructure
             var scissors = new Skill(name: "ハサミ", partsType: PartsType.arm);
             var ink = new Skill(name: "スミ", partsType: PartsType.breath);
             var bodyBlow = new Skill(name: "体当たり", partsType: PartsType.body);
-            var shellWorm = new Monster(
-                    name: "シェルワーム",
-                    transTermList: new List<Monster.TransTerm> {
-                        new Monster.TransTerm(hpLimit: 250)
-                        .AddNecessarySkill(scissors)
-                    })
-                    .AddLearnableSkill(scissors)
-                    .AddLearnableSkill(ink)
-                    .AddLearnableSkill(bodyBlow);
+            var shellWorm = new Monster(name: "シェルワーム")
+                .AddLearnableSkill(scissors)
+                .AddLearnableSkill(ink)
+                .AddLearnableSkill(bodyBlow);
+            var shellWormTerm = new Monster.TransTerm(monster: shellWorm, hpLimit: 250, priority: 50)
+                .AddNecessarySkill(scissors);
 
             context.skills.AddRange(new List<Skill> { scissors, ink, bodyBlow });
             context.monsters.AddRange(new List<Monster> { shellWorm });
+            context.transTerms.AddRange(new List<Monster.TransTerm> { shellWormTerm });
             context.SaveChanges();
         }
     }

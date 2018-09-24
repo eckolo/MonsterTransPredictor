@@ -11,10 +11,9 @@ namespace MonsterTransPredictor.Models.Application.Entity
     {
         public Monster() { }
 
-        public Monster(string name, List<TransTerm> transTermList)
+        public Monster(string name)
         {
             this.name = name ?? throw new ArgumentNullException(nameof(name));
-            this.transTermList = transTermList ?? throw new ArgumentNullException(nameof(transTermList));
         }
 
         /// <summary>
@@ -40,11 +39,5 @@ namespace MonsterTransPredictor.Models.Application.Entity
             learnableSkillList.Add(skill.AddLearnableMonster(this));
             return this;
         }
-
-        /// <summary>
-        /// 変身条件一覧
-        /// </summary>
-        [Required]
-        public List<TransTerm> transTermList { get; private set; }
     }
 }
