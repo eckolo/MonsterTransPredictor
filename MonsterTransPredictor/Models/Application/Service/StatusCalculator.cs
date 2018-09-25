@@ -14,22 +14,32 @@ namespace MonsterTransPredictor.Models.Application.Service
         /// <summary>
         /// 現在の習得技と追加する技から変身先モンスターを算出する
         /// </summary>
+        /// <param name="repository">必要なデータを読み出すリポジトリ</param>
         /// <param name="nowSkills">現在の習得技一覧</param>
         /// <param name="addSkill">新規習得技</param>
         /// <returns>体力値の下限と変身先モンスターのセット</returns>
-        public static Dictionary<Hp, Monster> CalcNextMonster(this IMonsterRepository monsterRepository, List<Skill> nowSkills, Skill addSkill)
+        public static Dictionary<Hp, Monster> CalcNextMonster(
+            this ITransTermRepository transTermRepository,
+            List<Skill> nowSkills,
+            Skill addSkill)
         {
             if(!(nowSkills?.Any() ?? false)) return null;
-            if(nowSkills.Count != 8) return null;
 
-            var nextSkills = new List<Skill> { addSkill }.Concat(nowSkills).Take(8);
+            var nextSkills = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills).Take(8);
 
             var keySkills = nextSkills
                 .GroupBy(skill => skill.partsType)
                 .Select(skills => skills.FirstOrDefault())
                 .Where(skill => skill != default);
 
-            return monsterRepository.SearchBySkills(keySkills);
+            var transTermList = transTermRepository.GetTransTerms(keySkills).ToList();
+
+            var result = transTermList
+                  .GroupBy(term => term.hpLimit)
+                  .Select(terms => terms.MaxKeys(term => term.priority).Single())
+                  .ToDictionary(term => term.hpLimit, term => term.monster);
+
+            return result;
         }
         /// <summary>
         /// 現在の習得技と吸収するモンスターから変身先モンスターを算出する
@@ -37,9 +47,12 @@ namespace MonsterTransPredictor.Models.Application.Service
         /// <param name="nowSkills">現在の習得技一覧</param>
         /// <param name="absorbMonster">吸収するモンスター</param>
         /// <returns>習得技と体力値下限のセットと変身先モンスターのセット</returns>
-        public static Dictionary<Skill, Dictionary<Hp, Monster>> CalcNextMonster(this IMonsterRepository monsterRepository, List<Skill> nowSkills, Monster absorbMonster)
+        public static Dictionary<Skill, Dictionary<Hp, Monster>> CalcNextMonster(
+            this ITransTermRepository transTermRepository,
+            List<Skill> nowSkills,
+            Monster absorbMonster)
             => absorbMonster.learnableSkillList
-                 .Select(skill => (skill, monster: monsterRepository.CalcNextMonster(nowSkills, skill)))
+                 .Select(skill => (skill, monster: transTermRepository.CalcNextMonster(nowSkills, skill)))
                  .ToDictionary(data => data.skill, data => data.monster);
     }
 }

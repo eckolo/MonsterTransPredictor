@@ -15,6 +15,10 @@ namespace MonsterTransPredictor.Controllers
         /// </summary>
         readonly IMonsterRepository monsterRepository;
         /// <summary>
+        /// 変身条件リポジトリ
+        /// </summary>
+        readonly ITransTermRepository transTermRepository;
+        /// <summary>
         /// 技情報リポジトリ
         /// </summary>
         readonly ISkillRepository skillRepository = new SkillRepository();
@@ -44,7 +48,7 @@ namespace MonsterTransPredictor.Controllers
             var masteredSkillList = masteredSkillIdList.GetSkillDetail(skillList);
             var addSkill = addSkillId.GetSkillDetail(skillList);
 
-            var nextMonster = monsterRepository.CalcNextMonster(masteredSkillList, addSkill);
+            var nextMonster = transTermRepository.CalcNextMonster(masteredSkillList, addSkill);
 
             return View(viewModel);
         }
