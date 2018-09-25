@@ -44,7 +44,7 @@ namespace MonsterTransPredictor.Controllers
             var masteredSkillList = masteredSkillIdList.GetSkillDetail(skillList);
             var addSkill = addSkillId.GetSkillDetail(skillList);
 
-            var nextMonster = masteredSkillList?.CalcNextMonster(addSkill);
+            var nextMonster = monsterRepository.CalcNextMonster(masteredSkillList, addSkill);
 
             return View(viewModel);
         }

@@ -16,11 +16,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
         /// </summary>
         /// <returns>全技データのIDと名称のセット</returns>
         Dictionary<int, string> ISkillRepository.GetAllNameList()
-        {
-            var mtp = MtpRepository.entity;
-
-            return mtp.skills.ToDictionary(skill => skill.id, skill => skill.name);
-        }
+            => MtpRepository.entity.skills.ToDictionary(skill => skill.id, skill => skill.name);
 
         /// <summary>
         /// 指定したIDの技情報を取得する
