@@ -17,7 +17,7 @@ namespace MonsterTransPredictor.Controllers
         /// <summary>
         /// 変身条件リポジトリ
         /// </summary>
-        readonly ITransTermRepository transTermRepository;
+        readonly ITransTermRepository transTermRepository = new TransTermRepository();
         /// <summary>
         /// 技情報リポジトリ
         /// </summary>
@@ -40,15 +40,19 @@ namespace MonsterTransPredictor.Controllers
         public ActionResult SkillSearch(List<int?> masteredSkillIdList = null, int? addSkillId = null)
         {
             var skillNameList = skillRepository.GetAllNameList();
-            var viewModel = new SkillSearchView(skillNameList, addSkillId, masteredSkillIdList);
 
-            var skillIdList = masteredSkillIdList.Concat(new List<int?> { addSkillId }).ToIdList();
-            var skillList = skillRepository.GetSkill(skillIdList);
+            var skillIdList = masteredSkillIdList?.Concat(new List<int?> { addSkillId }).ToIdList();
+            var skillDatas = skillRepository.GetSkill(skillIdList);
 
-            var masteredSkillList = masteredSkillIdList.GetSkillDetail(skillList);
-            var addSkill = addSkillId.GetSkillDetail(skillList);
+            var masteredSkillList = masteredSkillIdList.GetSkillDetail(skillDatas);
+            var addSkill = addSkillId.GetSkillDetail(skillDatas);
 
-            var nextMonster = transTermRepository.CalcNextMonster(masteredSkillList, addSkill);
+            var nextMonsters = transTermRepository.CalcNextMonster(masteredSkillList, addSkill);
+            var resultMonsterNames = nextMonsters
+                ?.Select(monster => (hp: monster.Key.real, monster.Value.name))
+                .ToList();
+
+            var viewModel = new SkillSearchView(skillNameList, addSkillId, masteredSkillIdList, resultMonsterNames);
 
             return View(viewModel);
         }

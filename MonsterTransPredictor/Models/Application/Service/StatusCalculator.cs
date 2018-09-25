@@ -27,19 +27,26 @@ namespace MonsterTransPredictor.Models.Application.Service
 
             var nextSkills = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills).Take(8);
 
-            var keySkills = nextSkills
+            var keySkillList = nextSkills
+                .Where(skill => skill != null)
                 .GroupBy(skill => skill.partsType)
                 .Select(skills => skills.FirstOrDefault())
-                .Where(skill => skill != default);
+                .Where(skill => skill != default)
+                .ToList();
 
-            var transTermList = transTermRepository.GetTransTerms(keySkills).ToList();
+            var transTermList = transTermRepository.GetTransTerms(keySkillList).ToList();
 
-            var result = transTermList
+            var nextMonsters = transTermList
                   .GroupBy(term => term.hpLimit)
                   .Select(terms => terms.MaxKeys(term => term.priority).Single())
                   .ToDictionary(term => term.hpLimit, term => term.monster);
 
-            return result;
+            if(nextMonsters.Keys.Max().real < 999)
+                nextMonsters = new Dictionary<Hp, Monster> { { new Hp(999), new Monster() } }
+                .Concat(nextMonsters)
+                .ToDictionary(monster => monster.Key, monster => monster.Value);
+
+            return nextMonsters;
         }
         /// <summary>
         /// 現在の習得技と吸収するモンスターから変身先モンスターを算出する

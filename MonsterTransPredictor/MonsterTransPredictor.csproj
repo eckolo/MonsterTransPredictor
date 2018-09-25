@@ -195,6 +195,7 @@
     <Compile Include="Models\Infrastructure\Mtp.cs" />
     <Compile Include="Models\Infrastructure\Repository\MtpRepository.cs" />
     <Compile Include="Models\Infrastructure\Repository\SkillRepository.cs" />
+    <Compile Include="Models\Infrastructure\Repository\TransTermRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

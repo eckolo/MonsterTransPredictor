@@ -1,6 +1,5 @@
 ﻿using MonsterTransPredictor.Models.Application.Entity;
 using MonsterTransPredictor.Models.Application.Repository;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,7 +24,8 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
         /// <returns>技情報一覧</returns>
         IEnumerable<Skill> ISkillRepository.GetSkill(IEnumerable<int> ids)
         {
-            throw new NotImplementedException();
+            var idList = ids ?? new List<int>();
+            return MtpRepository.entity.skills.Where(skill => idList.Contains(skill.id)).ToList();
         }
     }
 }

@@ -10,12 +10,13 @@ namespace MonsterTransPredictor.Models.Application.Value
     /// </summary>
     public class SkillSearchView
     {
-        public SkillSearchView(Dictionary<int, string> skillNameList, int? addSkillId = null, List<int?> masteredSkillIdList = null)
+        public SkillSearchView(Dictionary<int, string> skillNameList, int? addSkillId = null, List<int?> masteredSkillIdList = null, List<(uint hp, string name)> resultMonsterNames = null)
         {
             _skillNameList = skillNameList ?? throw new ArgumentNullException(nameof(skillNameList));
             this.addSkillId = addSkillId ?? this.addSkillId;
             this.masteredSkillIdList = masteredSkillIdList?.Select(id => id ?? 0).ToList()
                 ?? this.masteredSkillIdList;
+            this.resultMonsterNames = resultMonsterNames ?? this.resultMonsterNames;
         }
 
         /// <summary>
@@ -52,6 +53,6 @@ namespace MonsterTransPredictor.Models.Application.Value
         /// <summary>
         /// 予測結果
         /// </summary>
-        public List<(int hp, string name)> resultMonsterNames { get; } = new List<(int hp, string name)>();
+        public List<(uint hp, string name)> resultMonsterNames { get; } = new List<(uint hp, string name)>();
     }
 }
