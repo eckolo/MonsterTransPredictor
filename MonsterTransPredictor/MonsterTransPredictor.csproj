@@ -181,6 +181,7 @@
     <Compile Include="Models\Application\Entity\TransTerm.cs" />
     <Compile Include="Models\Application\Repository\IMonsterRepository.cs" />
     <Compile Include="Models\Application\Repository\ISkillRepository.cs" />
+    <Compile Include="Models\Application\Service\EnumerableManager.cs" />
     <Compile Include="Models\Application\Service\IdService.cs" />
     <Compile Include="Models\Application\Service\SkillService.cs" />
     <Compile Include="Models\Application\Service\StatusCalculator.cs" />
