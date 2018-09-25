@@ -21,12 +21,12 @@ namespace MonsterTransPredictor.Models.Infrastructure
                 .AddLearnableSkill(scissors)
                 .AddLearnableSkill(ink)
                 .AddLearnableSkill(bodyBlow);
-            var shellWormTerm = new Monster.TransTerm(monster: shellWorm, hpLimit: 250, priority: 50)
+            var shellWormTerm = new TransTerm(monster: shellWorm, hpLimit: 250, priority: 50)
                 .AddNecessarySkill(scissors);
 
             context.skills.AddRange(new List<Skill> { scissors, ink, bodyBlow });
             context.monsters.AddRange(new List<Monster> { shellWorm });
-            context.transTerms.AddRange(new List<Monster.TransTerm> { shellWormTerm });
+            context.transTerms.AddRange(new List<TransTerm> { shellWormTerm });
             context.SaveChanges();
         }
     }

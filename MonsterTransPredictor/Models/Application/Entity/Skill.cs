@@ -51,11 +51,11 @@ namespace MonsterTransPredictor.Models.Application.Entity
         /// <summary>
         /// 必要スキルとして含まれる条件リスト
         /// </summary>
-        public List<Monster.TransTerm> necessaryTransTermList { get; private set; }
+        public List<TransTerm> necessaryTransTermList { get; private set; }
 
-        public Skill AddnecessaryTransTerm(Monster.TransTerm transTerm)
+        public Skill AddnecessaryTransTerm(TransTerm transTerm)
         {
-            necessaryTransTermList = necessaryTransTermList ?? new List<Monster.TransTerm>();
+            necessaryTransTermList = necessaryTransTermList ?? new List<TransTerm>();
             necessaryTransTermList.Add(transTerm);
             return this;
         }

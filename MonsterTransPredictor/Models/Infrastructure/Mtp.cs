@@ -23,11 +23,11 @@
 
         public virtual DbSet<Skill> skills { get; set; }
 
-        public virtual DbSet<Monster.TransTerm> transTerms { get; set; }
+        public virtual DbSet<TransTerm> transTerms { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new Monster.TransTerm.Configuration());
+            modelBuilder.Configurations.Add(new TransTerm.Configuration());
         }
     }
 
