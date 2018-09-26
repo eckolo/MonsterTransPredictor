@@ -9,10 +9,10 @@
         <div class="panel-heading lead">習得済みの技</div>
         <p class="help-block">※ドラッグ＆ドロップで順番変更可能</p>
         <ul class="list-group sortable">
-            @foreach(var masteredSkillIdList in Model.masteredSkillIdList)
+            @for(int index = 0; index < Model.masteredSkillIdList.Count; index++)
             {
                 <li class="list-group-item">
-                    @Html.DropDownListFor(_ => masteredSkillIdList, Model.skillNameList, new { @class = "form-control" })
+                    @Html.DropDownListFor(_ => Model.masteredSkillIdList[index], Model.skillNameList, new { @class = "form-control" })
                 </li>
             }
         </ul>
@@ -28,7 +28,7 @@
         <div class="panel-heading lead">予測結果</div>
         <table class="table">
             <tr>
-                <td nowrap>HP条件/習得技</td>
+                <td nowrap>HP上限</td>
                 <th nowrap>@Model.addSkillName</th>
             </tr>
             @foreach(var monster in Model.resultMonsterNames)

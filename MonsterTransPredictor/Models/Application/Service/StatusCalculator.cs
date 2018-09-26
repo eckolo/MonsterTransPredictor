@@ -41,7 +41,7 @@ namespace MonsterTransPredictor.Models.Application.Service
                   .Select(terms => terms.MaxKeys(term => term.priority).Single())
                   .ToDictionary(term => term.hpLimit, term => term.monster);
 
-            if(nextMonsters.Keys.Max().real < 999)
+            if((nextMonsters?.Keys.Max().real ?? 0) < 999)
                 nextMonsters = new Dictionary<Hp, Monster> { { new Hp(999), new Monster() } }
                 .Concat(nextMonsters)
                 .ToDictionary(monster => monster.Key, monster => monster.Value);
