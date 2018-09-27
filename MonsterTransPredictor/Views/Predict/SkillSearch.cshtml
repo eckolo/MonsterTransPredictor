@@ -7,12 +7,12 @@
     @using(Html.BeginForm("SkillSearch", "Predict", FormMethod.Post, new { @class = "panel panel-info col-md-4" }))
     {
         <div class="panel-heading lead">習得済みの技</div>
-        <p class="help-block">※ドラッグ＆ドロップで順番変更可能</p>
         <ul class="list-group sortable">
             @for(int index = 0; index < Model.masteredSkillIdList.Count; index++)
             {
-                <li class="list-group-item">
-                    @Html.DropDownListFor(_ => Model.masteredSkillIdList[index], Model.skillNameList, new { @class = "form-control" })
+                <li class="list-group-item row">
+                    @Html.DropDownListFor(_ => Model.masteredSkillIdList[index], Model.skillNameList, new { @class = "form-control", @style = "display: inline" })
+                    <span class="btn btn-primary">入替</span>
                 </li>
             }
         </ul>
