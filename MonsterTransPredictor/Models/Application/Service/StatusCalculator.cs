@@ -25,7 +25,7 @@ namespace MonsterTransPredictor.Models.Application.Service
         {
             if(!(nowSkills?.Any() ?? false)) return null;
 
-            var nextSkills = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills).Take(8);
+            var nextSkills = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills).Take(8).ToList();
 
             var keySkillList = nextSkills
                 .Where(skill => skill != null)
@@ -36,13 +36,11 @@ namespace MonsterTransPredictor.Models.Application.Service
 
             var transTermList = transTermRepository.GetTransTerms(keySkillList).ToList();
 
-            var nextMonsters = transTermList
-                  .GroupBy(term => term.hpLimit)
-                  .Select(terms => terms.MaxKeys(term => term.priority).Single())
-                  .ToDictionary(term => term.hpLimit, term => term.monster);
+            var nextMonsters = transTermList.CalcNextMonsters();
 
-            if((nextMonsters?.Keys.Max().real ?? 0) < 999)
-                nextMonsters = new Dictionary<Hp, Monster> { { new Hp(999), new Monster() } }
+            //体力によっては変身しないことがある場合、変身しない体力区域に空値を入れる
+            if((nextMonsters?.Keys.Max().real ?? 0) < Const.MAX_HP)
+                nextMonsters = new Dictionary<Hp, Monster> { { Hp.max, new Monster() } }
                 .Concat(nextMonsters)
                 .ToDictionary(monster => monster.Key, monster => monster.Value);
 
