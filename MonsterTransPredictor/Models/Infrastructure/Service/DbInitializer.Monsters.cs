@@ -494,6 +494,20 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
             public static Monster RABI = new Monster(name: "R・A・B・I")
                 .AddLearnableSkill(Skills.牙)
                 .AddLearnableSkill(Skills.魅了凝視);
+            public static Monster ラモックスピンク = new Monster(name: "ラモックス（ピンク）")
+                .AddLearnableSkill(Skills.サミング)
+                .AddLearnableSkill(Skills.エルフショット)
+                .AddLearnableSkill(Skills.爪)
+                .AddLearnableSkill(Skills.フェイント);
+            public static Monster 巨獣 = new Monster(name: "巨獣")
+                .AddLearnableSkill(Skills.サミング)
+                .AddLearnableSkill(Skills.エルフショット)
+                .AddLearnableSkill(Skills.爪)
+                .AddLearnableSkill(Skills.フェイント);
+            public static Monster 麒麟 = new Monster(name: "麒麟")
+                .AddLearnableSkill(Skills.魅了凝視)
+                .AddLearnableSkill(Skills.放射火炎)
+                .AddLearnableSkill(Skills.光合成);
 
             public static Monster カモフック = new Monster(name: "カモフック")
                 .AddLearnableSkill(Skills.クチバシ)
@@ -546,6 +560,24 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 .AddLearnableSkill(Skills.スポイル)
                 .AddLearnableSkill(Skills.毒液);
 
+            public static Monster ニドヘッグ = new Monster(name: "ニドヘッグ")
+                .AddLearnableSkill(Skills.百足蹂躙);
+            public static Monster ロードスケルトン = new Monster(name: "ロードスケルトン")
+                .AddLearnableSkill(Skills.死の属性)
+                .AddLearnableSkill(Skills.生気吸収);
+            public static Monster スカルラドン = new Monster(name: "スカルラドン")
+                .AddLearnableSkill(Skills.火炎);
+
+            public static Monster フルド = new Monster(name: "フルド")
+                .AddLearnableSkill(Skills.グレムリンタッチ)
+                .AddLearnableSkill(Skills.毒霧)
+                .AddLearnableSkill(Skills.イルストーム);
+            public static Monster 病魔モール = new Monster(name: "病魔モール")
+                .AddLearnableSkill(Skills.触手)
+                .AddLearnableSkill(Skills.イルストーム)
+                .AddLearnableSkill(Skills.スポイル)
+                .AddLearnableSkill(Skills.死人ゴケ);
+
             public static Monster ピンクショック = new Monster(name: "ピンクショック")
                 .AddLearnableSkill(Skills.キック)
                 .AddLearnableSkill(Skills.毛繕い);
@@ -561,6 +593,8 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 .AddLearnableSkill(Skills.炎のくちづけ)
                 .AddLearnableSkill(Skills.ライトボール)
                 .AddLearnableSkill(Skills.毒霧);
+            public static Monster アラクーネ = new Monster(name: "アラクーネ")
+                .AddLearnableSkill(Skills.ミニオンストライク);
 
             public static Monster ルナティックハイ = new Monster(name: "ルナティックハイ")
                 .AddLearnableSkill(Skills.尾撃)
@@ -591,6 +625,12 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 .AddLearnableSkill(Skills.ふみつけ)
                 .AddLearnableSkill(Skills.フェロモン)
                 .AddLearnableSkill(Skills.死の凝視);
+            public static Monster 霜の巨人 = new Monster(name: "霜の巨人")
+                .AddLearnableSkill(Skills.冷気)
+                .AddLearnableSkill(Skills.アイススマッシュ)
+                .AddLearnableSkill(Skills.フリーズバリア);
+            public static Monster ベルヴァ = new Monster(name: "ベルヴァ")
+                .AddLearnableSkill(Skills.怒りの鉄拳);
 
             public static Monster 赤竜 = new Monster(name: "赤竜")
                 .AddLearnableSkill(Skills.爪)
@@ -607,6 +647,24 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 .AddLearnableSkill(Skills.石化ガス)
                 .AddLearnableSkill(Skills.タイタスウェイヴ)
                 .AddLearnableSkill(Skills.グリフィススクラッチ);
+            public static Monster 地竜 = new Monster(name: "地竜")
+                .AddLearnableSkill(Skills.地震)
+                .AddLearnableSkill(Skills.高温ガス);
+            public static Monster ドラゴンウォーロード = new Monster(name: "ドラゴンウォーロード")
+                .AddLearnableSkill(Skills.タイタスウェイヴ)
+                .AddLearnableSkill(Skills.グリフィススクラッチ)
+                .AddLearnableSkill(Skills.炎のくちづけ)
+                .AddLearnableSkill(Skills.高温ガス);
+
+            public static Monster タンザー = new Monster(name: "タンザー")
+                .AddLearnableSkill(Skills.強酸)
+                .AddLearnableSkill(Skills.イルストーム);
+
+            public static Monster イクストル = new Monster(name: "イクストル")
+                .AddLearnableSkill(Skills.生気吸収)
+                .AddLearnableSkill(Skills.グライダースパイク)
+                .AddLearnableSkill(Skills.竜巻)
+                .AddLearnableSkill(Skills.磁気嵐);
         }
     }
 }

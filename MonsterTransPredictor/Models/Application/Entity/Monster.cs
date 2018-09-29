@@ -25,12 +25,12 @@ namespace MonsterTransPredictor.Models.Application.Entity
         /// <summary>
         /// モンスター名称
         /// </summary>
+        [Required]
         public string name { get; private set; }
 
         /// <summary>
         /// 習得可能技一覧
         /// </summary>
-        [Required]
         public List<Skill> learnableSkillList { get; private set; }
 
         public Monster AddLearnableSkill(Skill skill)

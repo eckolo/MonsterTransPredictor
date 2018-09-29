@@ -8,6 +8,11 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
     {
         public static void Initialize(Mtp context)
         {
+            //データ全削除前に自動採番インデックスを初期化
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Monsters', RESEED, 0);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Skills', RESEED, 0);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('TransTerms', RESEED, 0);");
+
             //初期化前にデータを全削除
             context.monsters.RemoveRange(context.monsters.ToList());
             context.skills.RemoveRange(context.skills.ToList());
