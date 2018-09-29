@@ -3,7 +3,7 @@ using MonsterTransPredictor.Models.Application.Value;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MonsterTransPredictor.Models.Infrastructure
+namespace MonsterTransPredictor.Models.Infrastructure.Service
 {
     public class DbInitializer
     {
