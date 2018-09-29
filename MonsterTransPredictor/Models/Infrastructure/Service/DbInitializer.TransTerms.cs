@@ -247,20 +247,32 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                     .AddNecessarySkill(Skills.放射電撃)
                     .AddNecessarySkill(Skills.落雷),
 
-                new TransTerm(monster: Monsters.コスモデバウアー, hpLimit: Const.MAX_HP, priority: 140)
+                new TransTerm(monster: Monsters.ブッチ, hpLimit: Const.MAX_HP, priority: 140)
+                    .AddNecessarySkill(Skills.毒針),
+
+                //厳密な優先順位が不明なため最優先に仮置き
+                new TransTerm(monster: Monsters.トラップバイン, hpLimit: Const.MAX_HP, priority: 145)
+                    .AddNecessarySkill(Skills.足払い),
+                new TransTerm(monster: Monsters.シュリーカー, hpLimit: Const.MAX_HP, priority: 145)
+                    .AddNecessarySkill(Skills.胞子)
+                    .AddNecessarySkill(Skills.超音波),
+                new TransTerm(monster: Monsters.シュリーカー, hpLimit: Const.MAX_HP, priority: 145)
+                    .AddNecessarySkill(Skills.胞子)
+                    .AddNecessarySkill(Skills.サッドソング),
+                new TransTerm(monster: Monsters.魔鏡, hpLimit: Const.MAX_HP, priority: 145)
+                    .AddNecessarySkill(Skills.サイリフレクター),
+
+                new TransTerm(monster: Monsters.コスモデバウアー, hpLimit: 995, priority: 5)
                     .AddNecessarySkill(Skills.アイススマッシュ)
                     .AddNecessarySkill(Skills.冷気),
-                new TransTerm(monster: Monsters.コスモデバウアー, hpLimit: Const.MAX_HP, priority: 140)
+                new TransTerm(monster: Monsters.コスモデバウアー, hpLimit: 995, priority: 5)
                     .AddNecessarySkill(Skills.ハサミ)
                     .AddNecessarySkill(Skills.冷気),
 
-                new TransTerm(monster: Monsters.ブッチ, hpLimit: Const.MAX_HP, priority: 145)
-                    .AddNecessarySkill(Skills.毒針),
-
-                new TransTerm(monster: Monsters.トリケプス, hpLimit: Const.MAX_HP, priority: 150)
+                new TransTerm(monster: Monsters.トリケプス, hpLimit: 995, priority: 10)
                     .AddNecessarySkill(Skills.角)
                     .AddNecessarySkill(Skills.石化ガス),
-                new TransTerm(monster: Monsters.トリケプス, hpLimit: Const.MAX_HP, priority: 150)
+                new TransTerm(monster: Monsters.トリケプス, hpLimit: 995, priority: 10)
                     .AddNecessarySkill(Skills.ファングクラッシュ)
                     .AddNecessarySkill(Skills.石化ガス),
 
@@ -636,8 +648,79 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 new TransTerm(monster: Monsters.ピックバード, hpLimit: 105, priority: 5)
                     .AddNecessarySkill(Skills.クチバシ),
 
+
                 new TransTerm(monster: Monsters.スパルトイ, hpLimit: 100, priority: 5)
+                    .AddNecessarySkill(Skills.死の属性),
+
+
+                new TransTerm(monster: Monsters.麒麟)
+                    .AddNecessarySkill(Skills.麒麟の歌),
+
+                new TransTerm(monster: Monsters.ラモックスピンク)
+                    .AddNecessarySkill(Skills.サミング)
+                    .AddNecessarySkill(Skills.爪)
+                    .AddNecessarySkill(Skills.エルフショット),
+
+                new TransTerm(monster: Monsters.マンドレイク)
+                    .AddNecessarySkill(Skills.エルフショット)
+                    .AddNecessarySkill(Skills.睡眠ガス)
+                    .AddNecessarySkill(Skills.スクリーム)
+                    .AddNecessarySkill(Skills.ブレインクラッシュ)
+                    .AddNecessarySkill(Skills.吸血),
+
+                new TransTerm(monster: Monsters.カモフック)
+                    .AddNecessarySkill(Skills.クチバシ)
+                    .AddNecessarySkill(Skills.強酸)
+                    .AddNecessarySkill(Skills.ブーメランフック)
+                    .AddNecessarySkill(Skills.水撃),
+
+                new TransTerm(monster: Monsters.スフィンクス)
+                    .AddNecessarySkill(Skills.スフィンクスリドル),
+
+                new TransTerm(monster: Monsters.グリフォン小)
+                    .AddNecessarySkill(Skills.クチバシ)
+                    .AddNecessarySkill(Skills.翼)
+                    .AddNecessarySkill(Skills.グリフィススクラッチ)
+                    .AddNecessarySkill(Skills.しっぽ),
+
+                new TransTerm(monster: Monsters.スライム大)
+                    .AddNecessarySkill(Skills.溶解液)
+                    .AddNecessarySkill(Skills.スポイル)
+                    .AddNecessarySkill(Skills.生気吸収),
+
+                new TransTerm(monster: Monsters.デュラハン)
+                    .AddNecessarySkill(Skills.突き)
+                    .AddNecessarySkill(Skills.ふみつけ)
                     .AddNecessarySkill(Skills.死の属性)
+                    .AddNecessarySkill(Skills.サイレン)
+                    .AddNecessarySkill(Skills.暴走),
+
+                new TransTerm(monster: Monsters.ニドヘッグ)
+                    .AddNecessarySkill(Skills.死の属性)
+                    .AddNecessarySkill(Skills.百足蹂躙),
+
+                new TransTerm(monster: Monsters.ロードスケルトン)
+                    .AddNecessarySkill(Skills.死の属性)
+                    .AddNecessarySkill(Skills.草薙の剣)
+                    .AddNecessarySkill(Skills.聖歌),
+
+                new TransTerm(monster: Monsters.オーガ)
+                    .AddNecessarySkill(Skills.電撃)
+                    .AddNecessarySkill(Skills.グランドヒット)
+                    .AddNecessarySkill(Skills.突進),
+
+                new TransTerm(monster: Monsters.マリーチ)
+                    .AddNecessarySkill(Skills.石化凝視)
+                    .AddNecessarySkill(Skills.魅了凝視)
+                    .AddNecessarySkill(Skills.マヒ凝視)
+                    .AddNecessarySkill(Skills.死の凝視),
+
+                new TransTerm(monster: Monsters.RABI)
+                    .AddNecessarySkill(Skills.牙)
+                    .AddNecessarySkill(Skills.魅了凝視)
+                    .AddNecessarySkill(Skills.ねこだまし)
+                    .AddNecessarySkill(Skills.毛繕い)
+                    .AddNecessarySkill(Skills.竜巻),
             };
         }
     }

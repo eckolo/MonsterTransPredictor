@@ -17,11 +17,12 @@ namespace MonsterTransPredictor.Models.Application.Entity
             this.monster = monster ?? throw new ArgumentNullException(nameof(monster));
             _hpLimit = hpLimit;
             this.priority = priority;
+            special = false;
         }
-        public TransTerm(Monster monster, bool special = true)
+        public TransTerm(Monster monster)
         {
             this.monster = monster ?? throw new ArgumentNullException(nameof(monster));
-            this.special = special;
+            special = true;
         }
         /// <summary>
         /// 主キー
