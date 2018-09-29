@@ -13,9 +13,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
             context.skills.RemoveRange(context.skills.ToList());
             context.transTerms.RemoveRange(context.transTerms.ToList());
 
-            var shellWormTerm = new TransTerm(monster: Monsters.シェルワーム, hpLimit: 250, priority: 50)
-                .AddNecessarySkill(Skills.ハサミ);
-
+            //データ投入
             context.skills.AddRange(new List<Skill> {
                 Skills.ハサミ,
                 Skills.スミ,
@@ -168,7 +166,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.ユニコーン,
                 Monsters.ブッチ,
                 Monsters.キマイラ,
-                                                
+
                 Monsters.プリクタス,
                 Monsters.スポアパイル,
                 Monsters.マンドレイク,
@@ -178,7 +176,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.サンフラワー,
                 Monsters.シュリーカー,
                 Monsters.化石樹,
-                                                
+
                 Monsters.フェイトード,
                 Monsters.ガンフィッシュ,
                 Monsters.ソルジャービル,
@@ -188,7 +186,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.玄武,
                 Monsters.バジリスク,
                 Monsters.クラーケン,
-                                                
+
                 Monsters.シェルワーム,
                 Monsters.アームウォーカー,
                 Monsters.キラービー,
@@ -198,7 +196,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.ゼニスマンティス,
                 Monsters.コスモデバウアー,
                 Monsters.ゼロディバイダー,
-                                                
+
                 Monsters.ピックバード,
                 Monsters.ラバット,
                 Monsters.ドラゴンパピー,
@@ -208,7 +206,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.コカトリス,
                 Monsters.スフィンクス,
                 Monsters.朱雀,
-                                                
+
                 Monsters.ゼノ,
                 Monsters.スライム,
                 Monsters.ウィップジェリー,
@@ -218,7 +216,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.エアエレメンタル,
                 Monsters.ゼラチナスプランター,
                 Monsters.雪の精,
-                                                
+
                 Monsters.マッドアクス,
                 Monsters.ワンダーランス,
                 Monsters.ダガーグラブ,
@@ -228,7 +226,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.魔鏡,
                 Monsters.ミミック,
                 Monsters.ジブサムスカウト,
-                                                
+
                 Monsters.スパルトイ,
                 Monsters.ゴースト,
                 Monsters.ゾンビ,
@@ -238,7 +236,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.リッチ,
                 Monsters.スカルサウルス,
                 Monsters.デュラハン,
-                                                
+
                 Monsters.ワンダードギー,
                 Monsters.ガーゴイル,
                 Monsters.マンスネーク,
@@ -248,7 +246,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.ベクサーク,
                 Monsters.サイバーサーカー,
                 Monsters.ゼフォン,
-                                                
+
                 Monsters.スプライト,
                 Monsters.オンディーヌ,
                 Monsters.ピンクパンチ,
@@ -258,7 +256,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.サキュバス,
                 Monsters.ラミア,
                 Monsters.サイレン,
-                                                
+
                 Monsters.ブロンズプリマ,
                 Monsters.ロックバブーン,
                 Monsters.マスカラプリマ,
@@ -268,30 +266,30 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.サイクロプス,
                 Monsters.メタルチャリオット,
                 Monsters.巨人,
-                                                
+
                 Monsters.ストレイシープ,
                 Monsters.マスキャット,
                 Monsters.ティディ,
                 Monsters.RABI,
-                        
+
                 Monsters.カモフック,
                 Monsters.カモキング,
-                                                
+
                 Monsters.ドラゴンミニー,
                 Monsters.ソニックバット,
                 Monsters.グリフォン小,
-                                                
+
                 Monsters.ファイアクリスタル,
                 Monsters.フレイム,
                 Monsters.ウォーター,
                 Monsters.スライム大,
                 Monsters.スライム特大,
-                                    
+
                 Monsters.ピンクショック,
                 Monsters.ヴァルキリー剣,
                 Monsters.タイタニア,
                 Monsters.アンシリーコート,
-                                                
+
                 Monsters.ルナティックハイ,
                 Monsters.マリーチ,
 
@@ -300,12 +298,12 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 Monsters.オーガロード,
                 Monsters.ミノタウロス,
                 Monsters.バフォメット,
-                                                
+
                 Monsters.赤竜,
                 Monsters.雷竜,
                 Monsters.黒竜,
             });
-            context.transTerms.AddRange(new List<TransTerm> { shellWormTerm });
+            context.transTerms.AddRange(TransTerms.list);
             context.SaveChanges();
         }
     }
