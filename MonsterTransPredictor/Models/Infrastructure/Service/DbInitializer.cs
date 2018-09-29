@@ -1,11 +1,10 @@
 ﻿using MonsterTransPredictor.Models.Application.Entity;
-using MonsterTransPredictor.Models.Application.Value;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace MonsterTransPredictor.Models.Infrastructure.Service
 {
-    public class DbInitializer
+    public partial class DbInitializer
     {
         public static void Initialize(Mtp context)
         {
@@ -14,17 +13,21 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
             context.skills.RemoveRange(context.skills.ToList());
             context.transTerms.RemoveRange(context.transTerms.ToList());
 
-            var scissors = new Skill(name: "ハサミ", partsType: PartsType.arm);
-            var ink = new Skill(name: "スミ", partsType: PartsType.breath);
-            var bodyBlow = new Skill(name: "体当たり", partsType: PartsType.body);
-            var shellWorm = new Monster(name: "シェルワーム")
-                .AddLearnableSkill(scissors)
-                .AddLearnableSkill(ink)
-                .AddLearnableSkill(bodyBlow);
-            var shellWormTerm = new TransTerm(monster: shellWorm, hpLimit: 250, priority: 50)
-                .AddNecessarySkill(scissors);
 
-            context.skills.AddRange(new List<Skill> { scissors, ink, bodyBlow });
+            var shellWorm = new Monster(name: "シェルワーム")
+                .AddLearnableSkill(Skills.scissors)
+                .AddLearnableSkill(Skills.ink)
+                .AddLearnableSkill(Skills.bodyBlow);
+            var rocky = new Monster(name: "ロッキー")
+                .AddLearnableSkill(Skills.tail)
+                .AddLearnableSkill(Skills.tail)
+                .AddLearnableSkill(Skills.tail)
+                .AddLearnableSkill(Skills.tail);
+
+            var shellWormTerm = new TransTerm(monster: shellWorm, hpLimit: 250, priority: 50)
+                .AddNecessarySkill(Skills.scissors);
+
+            context.skills.AddRange(new List<Skill> { Skills.scissors, Skills.ink, Skills.bodyBlow });
             context.monsters.AddRange(new List<Monster> { shellWorm });
             context.transTerms.AddRange(new List<TransTerm> { shellWormTerm });
             context.SaveChanges();
