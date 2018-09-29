@@ -1,4 +1,5 @@
 ﻿using MonsterTransPredictor.Models.Infrastructure;
+using MonsterTransPredictor.Models.Infrastructure.Service;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;

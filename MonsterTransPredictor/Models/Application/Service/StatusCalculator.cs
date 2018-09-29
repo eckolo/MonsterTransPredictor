@@ -25,24 +25,27 @@ namespace MonsterTransPredictor.Models.Application.Service
         {
             if(!(nowSkills?.Any() ?? false)) return null;
 
-            var nextSkills = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills).Take(8);
-
-            var keySkillList = nextSkills
+            var nextSkillList = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills)
+                .Take(8)
                 .Where(skill => skill != null)
+                .ToList();
+
+            var keySkillList = nextSkillList
                 .GroupBy(skill => skill.partsType)
                 .Select(skills => skills.FirstOrDefault())
                 .Where(skill => skill != default)
                 .ToList();
 
-            var transTermList = transTermRepository.GetTransTerms(keySkillList).ToList();
+            //特殊変身条件と通常変身条件は判定に使う技リストが異なる
+            var transTermList = transTermRepository.GetTransTerms(keySkillList)
+                .Concat(transTermRepository.GetTransTerms(nextSkillList, true))
+                .ToList();
 
-            var nextMonsters = transTermList
-                  .GroupBy(term => term.hpLimit)
-                  .Select(terms => terms.MaxKeys(term => term.priority).Single())
-                  .ToDictionary(term => term.hpLimit, term => term.monster);
+            var nextMonsters = transTermList.CalcNextMonsters();
 
-            if((nextMonsters?.Keys.Max().real ?? 0) < 999)
-                nextMonsters = new Dictionary<Hp, Monster> { { new Hp(999), new Monster() } }
+            //体力によっては変身しないことがある場合、変身しない体力区域に空値を入れる
+            if((nextMonsters?.Keys.Max().real ?? 0) < Const.MAX_HP)
+                nextMonsters = new Dictionary<Hp, Monster> { { Hp.max, new Monster() } }
                 .Concat(nextMonsters)
                 .ToDictionary(monster => monster.Key, monster => monster.Value);
 
