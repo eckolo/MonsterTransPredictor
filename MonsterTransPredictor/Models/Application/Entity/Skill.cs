@@ -27,6 +27,7 @@ namespace MonsterTransPredictor.Models.Application.Entity
         /// <summary>
         /// 技名称
         /// </summary>
+        [Required]
         public string name { get; private set; }
 
         /// <summary>
@@ -38,7 +39,6 @@ namespace MonsterTransPredictor.Models.Application.Entity
         /// <summary>
         /// 習得可能なモンスター一覧
         /// </summary>
-        [Required]
         public List<Monster> learnableMonsterList { get; private set; }
 
         public Skill AddLearnableMonster(Monster monster)
