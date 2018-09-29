@@ -17,6 +17,12 @@ namespace MonsterTransPredictor.Models.Application.Entity
             this.monster = monster ?? throw new ArgumentNullException(nameof(monster));
             _hpLimit = hpLimit;
             this.priority = priority;
+            special = false;
+        }
+        public TransTerm(Monster monster)
+        {
+            this.monster = monster ?? throw new ArgumentNullException(nameof(monster));
+            special = true;
         }
         /// <summary>
         /// 主キー
@@ -38,12 +44,18 @@ namespace MonsterTransPredictor.Models.Application.Entity
         /// 体力条件
         /// </summary>
         [Required]
-        protected int _hpLimit { get; private set; }
+        protected int _hpLimit { get; private set; } = 0;
         /// <summary>
         /// 優先度
         /// </summary>
         [Required]
-        public int priority { get; private set; }
+        public int priority { get; private set; } = 0;
+
+        /// <summary>
+        /// 特殊変身（技条件を満たした時点で強制変身）フラグ
+        /// </summary>
+        [Required]
+        public bool special { get; private set; } = false;
 
         /// <summary>
         /// 必要スキル条件
