@@ -19,7 +19,7 @@ namespace MonsterTransPredictor.Models.Application.Service
         {
             //特殊変身判定
             var specialTerms = termList.Where(term => term.special);
-            if(specialTerms.Any()) return new Dictionary<Hp, Monster> { { Hp.max, specialTerms.Single().monster } };
+            if(specialTerms.Any()) return new Dictionary<Hp, Monster> { { Hp.max, specialTerms.First().monster } };
 
             return termList
                 .Where(term => !term.special)

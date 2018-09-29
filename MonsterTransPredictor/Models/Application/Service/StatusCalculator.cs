@@ -25,16 +25,21 @@ namespace MonsterTransPredictor.Models.Application.Service
         {
             if(!(nowSkills?.Any() ?? false)) return null;
 
-            var nextSkills = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills).Take(8).ToList();
-
-            var keySkillList = nextSkills
+            var nextSkillList = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills)
+                .Take(8)
                 .Where(skill => skill != null)
+                .ToList();
+
+            var keySkillList = nextSkillList
                 .GroupBy(skill => skill.partsType)
                 .Select(skills => skills.FirstOrDefault())
                 .Where(skill => skill != default)
                 .ToList();
 
-            var transTermList = transTermRepository.GetTransTerms(keySkillList).ToList();
+            //特殊変身条件と通常変身条件は判定に使う技リストが異なる
+            var transTermList = transTermRepository.GetTransTerms(keySkillList)
+                .Concat(transTermRepository.GetTransTerms(nextSkillList, true))
+                .ToList();
 
             var nextMonsters = transTermList.CalcNextMonsters();
 
