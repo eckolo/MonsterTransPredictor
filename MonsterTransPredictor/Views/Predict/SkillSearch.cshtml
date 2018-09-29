@@ -28,13 +28,13 @@
         <div class="panel-heading lead">予測結果</div>
         <table class="table">
             <tr>
-                <td nowrap>HP上限</td>
+                <td nowrap lead>HP条件</td>
                 <th nowrap>@Model.addSkillName</th>
             </tr>
             @foreach(var monster in Model.resultMonsterNames)
             {
                 <tr>
-                    <th nowrap>@monster.hp</th>
+                    <th nowrap>@monster.hp 以下</th>
                     <td nowrap>@monster.name</td>
                 </tr>
             }
