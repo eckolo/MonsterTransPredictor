@@ -24,7 +24,7 @@ namespace MonsterTransPredictor.Models.Application.Service
             return termList
                 .Where(term => !term.special)
                 .GroupBy(term => term.hpLimit)
-                .Select(terms => terms.MaxKeys(term => term.priority).Single())
+                .Select(terms => terms.MaxKeys(term => term.priority).First())
                 .ToDictionary(term => term.hpLimit, term => term.monster);
         }
     }
