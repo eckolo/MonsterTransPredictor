@@ -50,6 +50,7 @@ namespace MonsterTransPredictor.Controllers
             var nextMonsters = transTermRepository.CalcNextMonster(masteredSkillList, addSkill);
             var resultMonsterNames = nextMonsters
                 ?.Select(monster => (hp: monster.Key.real, monster.Value.name))
+                .OrderByDescending(monster => monster.hp)
                 .ToList();
 
             var viewModel = new SkillSearchView(skillNameList, addSkillId, masteredSkillIdList, resultMonsterNames);

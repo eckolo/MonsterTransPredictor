@@ -43,11 +43,17 @@ namespace MonsterTransPredictor.Models.Application.Service
 
             var nextMonsters = transTermList.CalcNextMonsters();
 
-            //体力によっては変身しないことがある場合、変身しない体力区域に空値を入れる
-            if((nextMonsters?.Keys.Max().real ?? 0) < Const.MAX_HP)
-                nextMonsters = new Dictionary<Hp, Monster> { { Hp.max, new Monster() } }
-                .Concat(nextMonsters)
-                .ToDictionary(monster => monster.Key, monster => monster.Value);
+            var maxHpKey = nextMonsters?.Keys.Max();
+            //体力によっては変身条件を満たさない場合、直下の変身条件を適用する
+            if(maxHpKey?.real is uint maxHpKeyReal && maxHpKeyReal < Const.MAX_HP)
+            {
+                nextMonsters.Add(Hp.max, nextMonsters[maxHpKey]);
+                nextMonsters.Remove(maxHpKey);
+            }
+
+            //一切変身条件を満たさない場合、ダミーのモンスターデータを最大体力に紐づけて入れておく
+            if((nextMonsters?.Keys.Max()?.real ?? 0) < Const.MAX_HP)
+                nextMonsters = new Dictionary<Hp, Monster> { { Hp.max, new Monster("※変身無し※") } };
 
             return nextMonsters;
         }
