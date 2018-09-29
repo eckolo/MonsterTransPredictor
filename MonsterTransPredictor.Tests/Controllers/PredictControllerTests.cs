@@ -1,17 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MonsterTransPredictor;
-using MonsterTransPredictor.Controllers;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
-namespace MonsterTransPredictor.Tests.Controllers
+namespace MonsterTransPredictor.Controllers.Tests
 {
-    [TestClass]
-    public class HomeControllerTest
+    [TestClass()]
+    public class PredictControllerTests
     {
+        [TestMethod()]
+        public void IndexTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void SkillSearchTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void MonsterSearchTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        /*
         [TestMethod]
         public void Index()
         {
@@ -49,6 +62,7 @@ namespace MonsterTransPredictor.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-        }
+        } 
+        */
     }
 }

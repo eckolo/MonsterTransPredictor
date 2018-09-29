@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Main Menu";
+}
+
+<div class="jumbotron">
+    <h1>モンスター変身先予測機</h1>
+    <p class="lead"><a href="https://ja.wikipedia.org/wiki/%E3%82%B5%E3%82%AC_%E3%83%95%E3%83%AD%E3%83%B3%E3%83%86%E3%82%A3%E3%82%A2">サガフロンティア &raquo;</a>のモンスター変身先を予測します</p>
+</div>
+
+<div class="row">
+    <div class="panel panel-info">
+        <div class="panel-heading">機能選択</div>
+        <ul class="list-group">
+            @Html.ActionLink("技で検索", "SkillSearch", "Predict", null, new { @class = "list-group-item lead" })
+            @Html.ActionLink("モンスターで検索", "MonsterSearch", "Predict", null, new { @class = "list-group-item lead" })
+        </ul>
+    </div>
+</div>
