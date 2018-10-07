@@ -12,7 +12,7 @@
             {
                 <li class="list-group-item row">
                     @Html.DropDownListFor(_ => Model.masteredSkillIdList[index], Model.skillNameList, new { @class = "form-control", @style = "display: inline" })
-                    <span class="btn btn-primary">入替</span>
+                    <span id="@Model.GetSwapButtonId(index)" class="btn btn-primary @Model.swapClass">入替</span>
                 </li>
             }
         </ul>
