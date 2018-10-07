@@ -54,5 +54,9 @@ namespace MonsterTransPredictor.Models.Application.Value
         /// 予測結果
         /// </summary>
         public List<(uint hp, string name)> resultMonsterNames { get; } = new List<(uint hp, string name)>();
+
+        public string GetSwapButtonId(int index) => $"{swapClass}{index}";
+
+        public string swapClass => "swap";
     }
 }
