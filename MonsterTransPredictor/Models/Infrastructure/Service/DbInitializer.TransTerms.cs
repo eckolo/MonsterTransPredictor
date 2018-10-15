@@ -135,6 +135,9 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
                 new TransTerm(monster: Monsters.ジブサムスカウト, hpLimit: Const.MAX_HP, priority: 80)
                     .AddNecessarySkill(Skills.石化凝視)
                     .AddNecessarySkill(Skills.グランドヒット),
+                new TransTerm(monster: Monsters.ジブサムスカウト, hpLimit: Const.MAX_HP, priority: 80)
+                    .AddNecessarySkill(Skills.石化凝視)
+                    .AddNecessarySkill(Skills.強打),
 
                 new TransTerm(monster: Monsters.キマイラ, hpLimit: Const.MAX_HP, priority: 85)
                     .AddNecessarySkill(Skills.高温ガス),
