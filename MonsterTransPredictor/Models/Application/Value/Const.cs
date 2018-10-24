@@ -9,5 +9,13 @@
         /// 体力上限定数
         /// </summary>
         public const int MAX_HP = 999;
+        /// <summary>
+        /// スキルデータの該当無しID
+        /// </summary>
+        public const int EMPTY_SKILL_ID = -1;
+        /// <summary>
+        /// 変身先モンスター無しの場合の表記
+        /// </summary>
+        public const string NOT_TRANS_NAME = "※変身無し※";
     }
 }

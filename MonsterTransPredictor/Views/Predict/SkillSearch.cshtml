@@ -8,7 +8,7 @@
     {
         <div class="panel-heading lead">習得済みの技</div>
         <ul class="list-group sortable">
-            @for(int index = 0; index < Model.masteredSkillIdList.Count; index++)
+            @for(int index = 0; index < Model.masteredSkillIdList.Length; index++)
             {
                 <li class="list-group-item row">
                     @Html.DropDownListFor(_ => Model.masteredSkillIdList[index], Model.skillNameList, new { @class = "form-control", @style = "display: inline" })
@@ -28,14 +28,20 @@
         <div class="panel-heading lead">予測結果</div>
         <table class="table">
             <tr>
-                <td nowrap lead>HP条件</td>
-                <th nowrap>@Model.addSkillName</th>
+                <td nowrap>HP条件</td>
+                @foreach(var skillName in Model.tableDatas.skillNames)
+                {
+                    <th nowrap>@skillName</th>
+                }
             </tr>
-            @foreach(var monster in Model.resultMonsterNames)
+            @foreach(var monster in Model.tableDatas.monsters)
             {
                 <tr>
                     <th nowrap>@monster.hp 以下</th>
-                    <td nowrap>@monster.name</td>
+                    @foreach(var name in monster.names)
+                    {
+                        <td rowspan="@name.rowspan" nowrap>@name.name</td>
+                    }
                 </tr>
             }
         </table>

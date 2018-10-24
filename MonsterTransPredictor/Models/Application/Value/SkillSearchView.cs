@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MonsterTransPredictor.Models.Application.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -10,13 +11,62 @@ namespace MonsterTransPredictor.Models.Application.Value
     /// </summary>
     public class SkillSearchView
     {
-        public SkillSearchView(Dictionary<int, string> skillNameList, int? addSkillId = null, List<int?> masteredSkillIdList = null, List<(uint hp, string name)> resultMonsterNames = null)
+        public SkillSearchView(
+            Dictionary<int, string> skillNameList,
+            int? addSkillId = null,
+            int?[] masteredSkillIdList = null,
+            (int? skillId, (Hp hp, Monster monster)[] monsters)[] nextMonsters = null)
         {
             _skillNameList = skillNameList ?? throw new ArgumentNullException(nameof(skillNameList));
+            _skillNameList.Add(Const.EMPTY_SKILL_ID, "");
+
             this.addSkillId = addSkillId ?? this.addSkillId;
-            this.masteredSkillIdList = masteredSkillIdList?.Select(id => id ?? 0).ToList()
+            this.masteredSkillIdList = masteredSkillIdList?.Select(id => id ?? Const.EMPTY_SKILL_ID).ToArray()
                 ?? this.masteredSkillIdList;
-            this.resultMonsterNames = resultMonsterNames ?? this.resultMonsterNames;
+
+            tableDatas = CalcResultTableDatas(nextMonsters, _skillNameList);
+        }
+
+        static (string[] skillNames, (uint hp, (string name, int rowspan)[])[] monsters) CalcResultTableDatas(
+            (int? skillId, (Hp hp, Monster monster)[] monsters)[] nextMonsters,
+            Dictionary<int, string> skillNameList)
+        {
+            var skillIds = nextMonsters.Select(calced => calced.skillId ?? Const.EMPTY_SKILL_ID).ToArray();
+
+            var hpList = nextMonsters
+                .SelectMany(calced => calced.monsters?.Select(monster => monster.hp))
+                .Distinct()
+                .ToArray();
+
+            int CalcRowspan(Hp target, IEnumerable<(Hp hp, Monster monster)> monsters, IEnumerable<Hp> all)
+            {
+                var maxUnderTarget = monsters
+                    .Select(monster => monster.hp)
+                    .Concat(new List<Hp> { Hp.zero })
+                    .Where(elem => elem < target)
+                    .Max();
+                var rowspan = all.Count(elem => maxUnderTarget < elem && elem <= target);
+                return rowspan;
+            }
+
+            var resultSkillNames = skillIds?.Select(id => skillNameList[id]).ToArray() ?? new string[] { };
+            var resultMonsters = nextMonsters
+                .SelectMany(row => row.monsters?
+                    .Select(monster => (
+                        skillId: row.skillId ?? Const.EMPTY_SKILL_ID,
+                        monster.monster.name,
+                        monster.hp,
+                        rowspan: CalcRowspan(monster.hp, row.monsters, hpList))))
+                .GroupBy(row => row.hp, calced => (calced.skillId, calced.name, calced.rowspan))
+                .Select(rows => (
+                    hp: rows.Key,
+                    monsters: rows.ToDictionary(
+                        row => row.skillId,
+                        row => (row.name, row.rowspan))))
+                .Select(row => (hp: row.hp.real, skillIds.Select(id => row.monsters[id]).ToArray()))
+                .ToArray();
+
+            return (resultSkillNames, resultMonsters);
         }
 
         /// <summary>
@@ -28,7 +78,6 @@ namespace MonsterTransPredictor.Models.Application.Value
         /// </summary>
         public SelectListItem[] skillNameList
             => _skillNameList
-            .Concat(new Dictionary<int, string> { { 0, "" } })
             .OrderBy(name => name.Value)
             .ThenBy(name => name.Key)
             .Select(name => new SelectListItem { Value = name.Key.ToString(), Text = name.Value })
@@ -37,7 +86,7 @@ namespace MonsterTransPredictor.Models.Application.Value
         /// <summary>
         /// 追加技のデフォルト選択ID
         /// </summary>
-        public int addSkillId { get; } = 0;
+        public int addSkillId { get; } = Const.EMPTY_SKILL_ID;
         /// <summary>
         /// 追加技の名称
         /// </summary>
@@ -48,12 +97,14 @@ namespace MonsterTransPredictor.Models.Application.Value
         /// <summary>
         /// 追加技のデフォルト選択ID
         /// </summary>
-        public List<int> masteredSkillIdList { get; } = Enumerable.Range(0, 8).Select(_ => 0).ToList();
+        public int[] masteredSkillIdList { get; } = Enumerable.Range(0, 8)
+            .Select(_ => Const.EMPTY_SKILL_ID)
+            .ToArray();
 
         /// <summary>
-        /// 予測結果
+        /// 予測結果テーブルデータ
         /// </summary>
-        public List<(uint hp, string name)> resultMonsterNames { get; } = new List<(uint hp, string name)>();
+        public (string[] skillNames, (uint hp, (string name, int rowspan)[] names)[] monsters) tableDatas { get; }
 
         public string GetSwapButtonId(int index) => $"{swapClass}{index}";
 

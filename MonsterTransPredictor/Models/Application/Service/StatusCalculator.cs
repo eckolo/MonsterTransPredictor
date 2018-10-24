@@ -23,7 +23,10 @@ namespace MonsterTransPredictor.Models.Application.Service
             List<Skill> nowSkills,
             Skill addSkill)
         {
-            if(!(nowSkills?.Any() ?? false)) return null;
+            var emptyMonsters = addSkill != null
+                ? new Dictionary<Hp, Monster> { { Hp.max, new Monster(Const.NOT_TRANS_NAME) } }
+                : new Dictionary<Hp, Monster> { };
+            if(!(nowSkills?.Any() ?? false)) return emptyMonsters;
 
             var nextSkillList = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills)
                 .Take(8)
@@ -52,8 +55,7 @@ namespace MonsterTransPredictor.Models.Application.Service
             }
 
             //一切変身条件を満たさない場合、ダミーのモンスターデータを最大体力に紐づけて入れておく
-            if((nextMonsters?.Keys.Max()?.real ?? 0) < Const.MAX_HP)
-                nextMonsters = new Dictionary<Hp, Monster> { { Hp.max, new Monster("※変身無し※") } };
+            if((nextMonsters?.Keys.Max()?.real ?? 0) < Const.MAX_HP) return emptyMonsters;
 
             return nextMonsters;
         }

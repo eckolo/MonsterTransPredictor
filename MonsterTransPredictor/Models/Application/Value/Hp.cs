@@ -23,6 +23,11 @@ namespace MonsterTransPredictor.Models.Application.Value
         public static readonly Hp max = new Hp(Const.MAX_HP);
 
         /// <summary>
+        /// 体力0
+        /// </summary>
+        public static readonly Hp zero = new Hp(0);
+
+        /// <summary>
         /// 実際の値
         /// </summary>
         public uint real { get; }
