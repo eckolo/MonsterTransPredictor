@@ -1,0 +1,12 @@
+﻿@model MonsterTransPredictor.Models.Application.Value.BaseSearchView
+
+<div class="panel-heading lead">習得済みの技</div>
+<ul class="list-group sortable">
+    @for(int index = 0; index < Model.masteredSkillIdList.Length; index++)
+    {
+        <li class="list-group-item row">
+            @Html.DropDownListFor(_ => Model.masteredSkillIdList[index], Model.skillNameList, new { @class = "form-control", @style = "display: inline" })
+            <span id="@Model.GetSwapButtonId(index)" class="btn btn-primary @Model.swapClass">入替</span>
+        </li>
+    }
+</ul>

@@ -13,7 +13,7 @@ namespace MonsterTransPredictor.Controllers
         /// <summary>
         /// モンスター情報リポジトリ
         /// </summary>
-        readonly IMonsterRepository monsterRepository;
+        readonly IMonsterRepository monsterRepository = new MonsterRepository();
         /// <summary>
         /// 変身条件リポジトリ
         /// </summary>
@@ -44,16 +44,13 @@ namespace MonsterTransPredictor.Controllers
             var skillIdList = masteredSkillIdList?.Concat(new List<int?> { addSkillId }).ToIdList();
             var skillDatas = skillRepository.GetSkill(skillIdList);
 
-            var masteredSkillList = masteredSkillIdList.GetSkillDetail(skillDatas);
+            var masteredSkills = masteredSkillIdList.GetSkillDetail(skillDatas);
             var addSkill = addSkillId.GetSkillDetail(skillDatas);
 
-            var nextMonsters = transTermRepository.CalcNextMonster(masteredSkillList, addSkill);
-            var resultMonsterNames = nextMonsters
-                ?.Select(monster => (hp: monster.Key.real, monster.Value.name))
-                .OrderByDescending(monster => monster.hp)
-                .ToList();
+            var resultMonsters = transTermRepository.CalcNextMonster(masteredSkills, addSkill);
+            var nextMonsters = new[] { (addSkill, resultMonsters) };
 
-            var viewModel = new SkillSearchView(skillNameList, addSkillId, masteredSkillIdList, resultMonsterNames);
+            var viewModel = new SkillSearchView(skillNameList, addSkill, masteredSkills, nextMonsters);
 
             return View(viewModel);
         }
@@ -61,9 +58,22 @@ namespace MonsterTransPredictor.Controllers
         /// モンスターによる変身先予測
         /// </summary>
         /// <returns>HTMLページ</returns>
-        public ActionResult MonsterSearch()
+        public ActionResult MonsterSearch(List<int?> masteredSkillIdList = null, int? absorbMonsterId = null)
         {
-            return View();
+            var skillNameList = skillRepository.GetAllNameList();
+            var monsterNameList = monsterRepository.GetAllNameList();
+
+            var skillIdList = masteredSkillIdList?.Concat(new List<int?> { absorbMonsterId }).ToIdList();
+            var skillDatas = skillRepository.GetSkill(skillIdList);
+
+            var masteredSkills = masteredSkillIdList.GetSkillDetail(skillDatas);
+            var absorbMonster = monsterRepository.GetMonster(absorbMonsterId);
+
+            var resultMonsters = transTermRepository.CalcNextMonster(masteredSkills, absorbMonster);
+
+            var viewModel = new MonsterSearchView(skillNameList, monsterNameList, absorbMonster, masteredSkills, resultMonsters);
+
+            return View(viewModel);
         }
     }
 }

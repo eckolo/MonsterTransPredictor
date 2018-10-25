@@ -187,12 +187,15 @@
     <Compile Include="Models\Application\Service\MonsterService.cs" />
     <Compile Include="Models\Application\Service\SkillService.cs" />
     <Compile Include="Models\Application\Service\StatusCalculator.cs" />
+    <Compile Include="Models\Application\Value\BaseSearchView.cs" />
     <Compile Include="Models\Application\Value\Const.cs" />
     <Compile Include="Models\Application\Value\Hp.cs" />
     <Compile Include="Models\Application\Entity\Monster.cs" />
+    <Compile Include="Models\Application\Value\MonsterSearchView.cs" />
     <Compile Include="Models\Application\Value\PartsType.cs" />
     <Compile Include="Models\Application\Entity\Skill.cs" />
     <Compile Include="Models\Application\Value\SkillSearchView.cs" />
+    <Compile Include="Models\Infrastructure\Repository\MonsterRepository.cs" />
     <Compile Include="Models\Infrastructure\Service\DbInitializer.cs" />
     <Compile Include="Models\Infrastructure\Service\DbInitializer.Monsters.cs" />
     <Compile Include="Models\Infrastructure\Service\DbInitializer.Skills.cs" />
@@ -249,6 +252,9 @@
     <Content Include="Views\Predict\_ViewStart.cshtml" />
     <Content Include="Views\Predict\SkillSearch.cshtml" />
     <Content Include="Views\Predict\MonsterSearch.cshtml" />
+    <Content Include="Views\Predict\_MasteredSkills.cshtml" />
+    <Content Include="Views\Predict\_Search.cshtml" />
+    <Content Include="Views\Predict\_ResultTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

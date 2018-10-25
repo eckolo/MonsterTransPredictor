@@ -1,0 +1,24 @@
+﻿@model MonsterTransPredictor.Models.Application.Value.BaseSearchView
+
+<div class="panel panel-info col-md-8">
+    <div class="panel-heading lead">予測結果</div>
+    <table class="table">
+        <tr>
+            <td nowrap>HP条件</td>
+            @foreach(var skillName in Model.tableDatas.skillNames)
+            {
+                <th nowrap>@skillName</th>
+            }
+        </tr>
+        @foreach(var monster in Model.tableDatas.monsters)
+        {
+            <tr>
+                <th nowrap>@monster.hp 以下</th>
+                @foreach(var name in monster.names)
+                {
+                    <td rowspan="@name.rowspan" nowrap>@name.name</td>
+                }
+            </tr>
+        }
+    </table>
+</div>
