@@ -47,13 +47,8 @@ namespace MonsterTransPredictor.Controllers
             var masteredSkills = masteredSkillIdList.GetSkillDetail(skillDatas);
             var addSkill = addSkillId.GetSkillDetail(skillDatas);
 
-            var resultMonsters = transTermRepository.CalcNextMonster(masteredSkills, addSkill)?
-                .Select(monster => (hp: monster.Key, monster: monster.Value))
-                .OrderByDescending(monster => monster.hp)
-                .ToArray();
-
+            var resultMonsters = transTermRepository.CalcNextMonster(masteredSkills, addSkill);
             var nextMonsters = new[] { (addSkill, resultMonsters) };
-            var masteredSkillIds = masteredSkillIdList?.ToArray();
 
             var viewModel = new SkillSearchView(skillNameList, addSkill, masteredSkills, nextMonsters);
 
