@@ -13,7 +13,7 @@ namespace MonsterTransPredictor.Controllers
         /// <summary>
         /// モンスター情報リポジトリ
         /// </summary>
-        readonly IMonsterRepository monsterRepository;
+        readonly IMonsterRepository monsterRepository = new MonsterRepository();
         /// <summary>
         /// 変身条件リポジトリ
         /// </summary>
