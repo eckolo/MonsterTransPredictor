@@ -6,44 +6,12 @@
 <div class="row">
     @using(Html.BeginForm("SkillSearch", "Predict", FormMethod.Post, new { @class = "panel panel-info col-md-4" }))
     {
-        <div class="panel-heading lead">習得済みの技</div>
-        <ul class="list-group sortable">
-            @for(int index = 0; index < Model.masteredSkillIdList.Length; index++)
-            {
-                <li class="list-group-item row">
-                    @Html.DropDownListFor(_ => Model.masteredSkillIdList[index], Model.skillNameList, new { @class = "form-control", @style = "display: inline" })
-                    <span id="@Model.GetSwapButtonId(index)" class="btn btn-primary @Model.swapClass">入替</span>
-                </li>
-            }
-        </ul>
+        @Html.Partial("_MasteredSkills", Model)
         <div class="panel-heading lead">新規習得技</div>
         <div class="panel-body">
             @Html.DropDownListFor(Model => Model.addSkillId, Model.skillNameList, new { @class = "form-control" })
         </div>
-        <div class="panel-footer">
-            <button type="submit" class="btn btn-primary btn-lg">検索</button>
-        </div>
+        @Html.Partial("_Search")
     }
-    <div class="panel panel-info col-md-8">
-        <div class="panel-heading lead">予測結果</div>
-        <table class="table">
-            <tr>
-                <td nowrap>HP条件</td>
-                @foreach(var skillName in Model.tableDatas.skillNames)
-                {
-                    <th nowrap>@skillName</th>
-                }
-            </tr>
-            @foreach(var monster in Model.tableDatas.monsters)
-            {
-                <tr>
-                    <th nowrap>@monster.hp 以下</th>
-                    @foreach(var name in monster.names)
-                    {
-                        <td rowspan="@name.rowspan" nowrap>@name.name</td>
-                    }
-                </tr>
-            }
-        </table>
-    </div>
+    @Html.Partial("_ResultTable", Model)
 </div>

@@ -250,6 +250,9 @@
     <Content Include="Views\Predict\_ViewStart.cshtml" />
     <Content Include="Views\Predict\SkillSearch.cshtml" />
     <Content Include="Views\Predict\MonsterSearch.cshtml" />
+    <Content Include="Views\Predict\_MasteredSkills.cshtml" />
+    <Content Include="Views\Predict\_Search.cshtml" />
+    <Content Include="Views\Predict\_ResultTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
