@@ -1,7 +1,17 @@
-﻿@{
+﻿@model MonsterTransPredictor.Models.Application.Value.MonsterSearchView
+@{
     ViewBag.Title = "Monster Search";
 }
 
-<div class="jumbotron">
-    <h1>Coming Soon</h1>
+<div class="row">
+    @using(Html.BeginForm("SkillSearch", "Predict", FormMethod.Post, new { @class = "panel panel-info col-md-4" }))
+    {
+        @Html.Partial("_MasteredSkills", Model)
+        <div class="panel-heading lead">新規習得技</div>
+        <div class="panel-body">
+            @Html.DropDownListFor(Model => Model.absorbMonsterId, Model.monsterNameList, new { @class = "form-control" })
+        </div>
+        @Html.Partial("_Search")
+    }
+    @Html.Partial("_ResultTable", Model)
 </div>

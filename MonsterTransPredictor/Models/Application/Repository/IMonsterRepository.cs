@@ -17,8 +17,8 @@ namespace MonsterTransPredictor.Models.Application.Repository
         /// <summary>
         /// 指定したIDのモンスター情報を取得する
         /// </summary>
-        /// <param name="ids">IDのリスト</param>
-        /// <returns>モンスター情報一覧</returns>
-        IEnumerable<Monster> GetMonster(IEnumerable<int> ids);
+        /// <param name="id">ID</param>
+        /// <returns>モンスター情報</returns>
+        Monster GetMonster(int? id);
     }
 }

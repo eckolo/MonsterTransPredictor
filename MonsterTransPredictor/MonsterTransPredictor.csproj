@@ -191,6 +191,7 @@
     <Compile Include="Models\Application\Value\Const.cs" />
     <Compile Include="Models\Application\Value\Hp.cs" />
     <Compile Include="Models\Application\Entity\Monster.cs" />
+    <Compile Include="Models\Application\Value\MonsterSearchView.cs" />
     <Compile Include="Models\Application\Value\PartsType.cs" />
     <Compile Include="Models\Application\Entity\Skill.cs" />
     <Compile Include="Models\Application\Value\SkillSearchView.cs" />

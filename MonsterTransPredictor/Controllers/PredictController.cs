@@ -58,9 +58,22 @@ namespace MonsterTransPredictor.Controllers
         /// モンスターによる変身先予測
         /// </summary>
         /// <returns>HTMLページ</returns>
-        public ActionResult MonsterSearch()
+        public ActionResult MonsterSearch(List<int?> masteredSkillIdList = null, int? absorbMonsterId = null)
         {
-            return View();
+            var skillNameList = skillRepository.GetAllNameList();
+            var monsterNameList = monsterRepository.GetAllNameList();
+
+            var skillIdList = masteredSkillIdList?.Concat(new List<int?> { absorbMonsterId }).ToIdList();
+            var skillDatas = skillRepository.GetSkill(skillIdList);
+
+            var masteredSkills = masteredSkillIdList.GetSkillDetail(skillDatas);
+            var absorbMonster = monsterRepository.GetMonster(absorbMonsterId);
+
+            var resultMonsters = transTermRepository.CalcNextMonster(masteredSkills, absorbMonster);
+
+            var viewModel = new MonsterSearchView(skillNameList, monsterNameList, absorbMonster, masteredSkills, resultMonsters);
+
+            return View(viewModel);
         }
     }
 }
