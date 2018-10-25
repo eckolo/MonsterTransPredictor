@@ -187,6 +187,7 @@
     <Compile Include="Models\Application\Service\MonsterService.cs" />
     <Compile Include="Models\Application\Service\SkillService.cs" />
     <Compile Include="Models\Application\Service\StatusCalculator.cs" />
+    <Compile Include="Models\Application\Value\BaseSearchView.cs" />
     <Compile Include="Models\Application\Value\Const.cs" />
     <Compile Include="Models\Application\Value\Hp.cs" />
     <Compile Include="Models\Application\Entity\Monster.cs" />

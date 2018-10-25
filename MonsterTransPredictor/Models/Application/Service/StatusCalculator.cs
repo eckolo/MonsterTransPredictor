@@ -23,10 +23,10 @@ namespace MonsterTransPredictor.Models.Application.Service
             List<Skill> nowSkills,
             Skill addSkill)
         {
-            var emptyMonsters = addSkill != null
-                ? new Dictionary<Hp, Monster> { { Hp.max, new Monster(Const.NOT_TRANS_NAME) } }
-                : new Dictionary<Hp, Monster> { };
-            if(!(nowSkills?.Any() ?? false)) return emptyMonsters;
+            var emptyMonsters = new Dictionary<Hp, Monster> { { Hp.max, new Monster(Const.NOT_TRANS_NAME) } };
+            if(!(nowSkills?.Any() ?? false)) return addSkill != null 
+                    ? emptyMonsters 
+                    : new Dictionary<Hp, Monster> { };
 
             var nextSkillList = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills)
                 .Take(8)
