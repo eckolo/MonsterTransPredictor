@@ -20,12 +20,12 @@ namespace MonsterTransPredictor.Models.Application.Service
         /// <returns>体力値の下限と変身先モンスターのセット</returns>
         public static Dictionary<Hp, Monster> CalcNextMonster(
             this ITransTermRepository transTermRepository,
-            List<Skill> nowSkills,
+            Skill[] nowSkills,
             Skill addSkill)
         {
             var emptyMonsters = new Dictionary<Hp, Monster> { { Hp.max, new Monster(Const.NOT_TRANS_NAME) } };
-            if(!(nowSkills?.Any() ?? false)) return addSkill != null 
-                    ? emptyMonsters 
+            if(!(nowSkills?.Any() ?? false)) return addSkill != null
+                    ? emptyMonsters
                     : new Dictionary<Hp, Monster> { };
 
             var nextSkillList = new List<Skill> { addSkill ?? nowSkills.Last() }.Concat(nowSkills)
@@ -67,7 +67,7 @@ namespace MonsterTransPredictor.Models.Application.Service
         /// <returns>習得技と体力値下限のセットと変身先モンスターのセット</returns>
         public static Dictionary<Skill, Dictionary<Hp, Monster>> CalcNextMonster(
             this ITransTermRepository transTermRepository,
-            List<Skill> nowSkills,
+            Skill[] nowSkills,
             Monster absorbMonster)
             => absorbMonster.learnableSkillList
                  .Select(skill => (skill, monster: transTermRepository.CalcNextMonster(nowSkills, skill)))

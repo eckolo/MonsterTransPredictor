@@ -9,8 +9,8 @@ namespace MonsterTransPredictor.Models.Application.Service
     /// </summary>
     public static class SkillService
     {
-        public static List<Skill> GetSkillDetail(this List<int?> skillIdList, IEnumerable<Skill> skillList)
-            => skillIdList?.Select(id => skillList?.SingleOrDefault(skill => skill.id == id)).ToList();
+        public static Skill[] GetSkillDetail(this List<int?> skillIdList, IEnumerable<Skill> skillList)
+            => skillIdList?.Select(id => skillList?.SingleOrDefault(skill => skill.id == id)).ToArray();
 
         public static Skill GetSkillDetail(this int? skillId, IEnumerable<Skill> skillList)
             => new List<int?> { skillId }.GetSkillDetail(skillList).Single();

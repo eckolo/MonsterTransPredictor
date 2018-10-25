@@ -10,24 +10,17 @@ namespace MonsterTransPredictor.Models.Application.Value
     {
         public SkillSearchView(
             Dictionary<int, string> skillNameList,
-            int? addSkillId = null,
-            int?[] masteredSkillIdList = null,
-            (int? skillId, (Hp hp, Monster monster)[] monsters)[] nextMonsters = null)
-                : base(skillNameList, masteredSkillIdList, nextMonsters)
+            Skill addSkill = null,
+            Skill[] masteredSkillList = null,
+            (Skill skill, (Hp hp, Monster monster)[] monsters)[] nextMonsters = null)
+                : base(skillNameList, masteredSkillList, nextMonsters)
         {
-            this.addSkillId = addSkillId ?? this.addSkillId;
+            addSkillId = addSkill?.id ?? addSkillId;
         }
 
         /// <summary>
         /// 追加技のデフォルト選択ID
         /// </summary>
-        public int addSkillId { get; } = Const.EMPTY_SKILL_ID;
-        /// <summary>
-        /// 追加技の名称
-        /// </summary>
-        public string addSkillName
-            => _skillNameList.ContainsKey(addSkillId)
-            ? _skillNameList[addSkillId]
-            : "";
+        public int addSkillId { get; } = Const.EMPTY_ID;
     }
 }

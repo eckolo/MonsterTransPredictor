@@ -10,9 +10,9 @@
         /// </summary>
         public const int MAX_HP = 999;
         /// <summary>
-        /// スキルデータの該当無しID
+        /// 技/モンスターデータの該当無しID
         /// </summary>
-        public const int EMPTY_SKILL_ID = -1;
+        public const int EMPTY_ID = -1;
         /// <summary>
         /// 変身先モンスター無しの場合の表記
         /// </summary>
