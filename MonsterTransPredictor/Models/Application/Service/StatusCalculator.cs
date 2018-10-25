@@ -74,8 +74,10 @@ namespace MonsterTransPredictor.Models.Application.Service
             this ITransTermRepository transTermRepository,
             Skill[] nowSkills,
             Monster absorbMonster)
-            => absorbMonster.learnableSkillList
-                 .Select(skill => (skill, monster: transTermRepository.CalcNextMonster(nowSkills, skill)))
-                 .ToArray();
+            => absorbMonster?
+                .learnableSkillList?
+                .Select(skill => (skill, monster: transTermRepository.CalcNextMonster(nowSkills, skill)))
+                .ToArray()
+                ?? new (Skill skill, (Hp hp, Monster monster)[] monsters)[] { };
     }
 }

@@ -45,20 +45,28 @@ namespace MonsterTransPredictor.Models.Application.Value
             }
 
             var resultSkillNames = skillIds?.Select(id => skillNameList[id]).ToArray() ?? new string[] { };
-            var resultMonsters = nextMonsters
+
+            var nextMonsterNames = nextMonsters
                 .SelectMany(row => row.monsters?
                     .Select(monster => (
                         skillId: row.skill?.id ?? Const.EMPTY_ID,
                         monster.monster.name,
                         monster.hp,
                         rowspan: CalcRowspan(monster.hp, row.monsters, hpList))))
+                .ToArray();
+            var tableLines = nextMonsterNames
                 .GroupBy(row => row.hp, calced => (calced.skillId, calced.name, calced.rowspan))
                 .Select(rows => (
                     hp: rows.Key,
                     monsters: rows.ToDictionary(
                         row => row.skillId,
                         row => (row.name, row.rowspan))))
-                .Select(row => (hp: row.hp.real, skillIds.Select(id => row.monsters[id]).ToArray()))
+                .ToArray();
+            var resultMonsters = tableLines
+                .Select(row => (
+                    hp: row.hp.real,
+                    skillIds.Where(id => row.monsters.ContainsKey(id)).Select(id => row.monsters[id]).ToArray()))
+                .OrderByDescending(row => row.hp)
                 .ToArray();
 
             return (resultSkillNames, resultMonsters);
