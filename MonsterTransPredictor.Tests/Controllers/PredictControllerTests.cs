@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace MonsterTransPredictor.Controllers.Tests
 {
@@ -9,60 +8,40 @@ namespace MonsterTransPredictor.Controllers.Tests
         [TestMethod()]
         public void IndexTest()
         {
-            throw new NotImplementedException();
+            // Arrange
+            var controller = new PredictController();
+
+            // Act
+            var result = controller.Index();
+
+            // Assert
+            Assert.IsNotNull(result);
         }
 
         [TestMethod()]
         public void SkillSearchTest()
         {
-            throw new NotImplementedException();
+            // Arrange
+            var controller = new PredictController();
+
+            // Act
+            var result = controller.SkillSearch();
+
+            // Assert
+            Assert.IsNotNull(result);
         }
 
         [TestMethod()]
         public void MonsterSearchTest()
         {
-            throw new NotImplementedException();
-        }
-
-        /*
-        [TestMethod]
-        public void Index()
-        {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new PredictController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            var result = controller.MonsterSearch();
 
             // Assert
             Assert.IsNotNull(result);
         }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        } 
-        */
     }
 }
