@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MonsterTransPredictor.Models.Application.Service
@@ -16,10 +17,10 @@ namespace MonsterTransPredictor.Models.Application.Service
         /// <param name="source">元リスト</param>
         /// <param name="selector">最大値判定値算出関数</param>
         /// <returns></returns>
-        public static IEnumerable<TSource> MaxKeys<TSource, TComparable>(this IEnumerable<TSource> source, System.Func<TSource, TComparable> selector)
-            where TComparable : System.IComparable<TComparable>
+        public static IEnumerable<TSource> MaxKeys<TSource, TComparable>(this IEnumerable<TSource> source, Func<TSource, TComparable> selector)
+            where TComparable : IComparable<TComparable>
         {
-            if(!source?.Any() ?? true) return new List<TSource>();
+            if(!source?.Any() ?? true) return source;
             var maxValue = source.Max(selector);
             return source.Where(elem => selector(elem).CompareTo(maxValue) == 0);
         }
@@ -31,10 +32,10 @@ namespace MonsterTransPredictor.Models.Application.Service
         /// <param name="source">元リスト</param>
         /// <param name="selector">最小値判定値算出関数</param>
         /// <returns></returns>
-        public static IEnumerable<TSource> MinKeys<TSource, TComparable>(this IEnumerable<TSource> source, System.Func<TSource, TComparable> selector)
-            where TComparable : System.IComparable<TComparable>
+        public static IEnumerable<TSource> MinKeys<TSource, TComparable>(this IEnumerable<TSource> source, Func<TSource, TComparable> selector)
+            where TComparable : IComparable<TComparable>
         {
-            if(!source?.Any() ?? true) return new List<TSource>();
+            if(!source?.Any() ?? true) return source;
             var minValue = source.Min(selector);
             return source.Where(elem => selector(elem).CompareTo(minValue) == 0);
         }
