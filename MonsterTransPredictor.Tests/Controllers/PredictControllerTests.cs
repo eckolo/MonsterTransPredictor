@@ -17,31 +17,5 @@ namespace MonsterTransPredictor.Controllers.Tests
             // Assert
             Assert.IsNotNull(result);
         }
-
-        [TestMethod()]
-        public void SkillSearchTest()
-        {
-            // Arrange
-            var controller = new PredictController();
-
-            // Act
-            var result = controller.SkillSearch();
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod()]
-        public void MonsterSearchTest()
-        {
-            // Arrange
-            var controller = new PredictController();
-
-            // Act
-            var result = controller.MonsterSearch();
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
     }
 }
