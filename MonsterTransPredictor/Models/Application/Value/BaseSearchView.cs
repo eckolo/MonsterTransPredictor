@@ -1,4 +1,5 @@
 ﻿using MonsterTransPredictor.Models.Application.Entity;
+using MonsterTransPredictor.Models.Application.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,15 @@ namespace MonsterTransPredictor.Models.Application.Value
     public abstract class BaseSearchView
     {
         public BaseSearchView(
-            Dictionary<int, string> skillNameList,
+            Dictionary<int, (PartsType category, string name)> skillNameList,
             Skill[] masteredSkillList = null,
             (Skill skill, (Hp hp, Monster monster)[] monsters)[] nextMonsters = null)
         {
-            _skillNameList = skillNameList ?? throw new ArgumentNullException(nameof(skillNameList));
+            _skillNameList = skillNameList.ToDictionary(skill => skill.Key, skill => skill.Value.name)
+                ?? throw new ArgumentNullException(nameof(skillNameList));
             _skillNameList.Add(Const.EMPTY_ID, "");
+
+            skillSelectList = CalcSkillSelectList(skillNameList);
 
             masteredSkillIdList = masteredSkillList?.Select(skill => skill?.id ?? Const.EMPTY_ID).ToArray()
                 ?? masteredSkillIdList;
@@ -72,19 +76,38 @@ namespace MonsterTransPredictor.Models.Application.Value
             return (resultSkillNames, resultMonsters);
         }
 
+        static SelectListItem[] CalcSkillSelectList(Dictionary<int, (PartsType category, string name)> skillList)
+        {
+            var categoryList = skillList
+                .Select(skill => skill.Value.category)
+                .Distinct()
+                .ToDictionary(category => category, category => new SelectListGroup { Name = category.ToName() });
+
+            var defaultSelectListItem = new SelectListItem { Value = Const.EMPTY_ID.ToString(), Text = "" };
+            var selectListItems = skillList
+                .OrderBy(skill => skill.Value.category)
+                .ThenBy(skill => skill.Value.name)
+                .ThenBy(skill => skill.Key)
+                .Select(skill => new SelectListItem
+                {
+                    Value = skill.Key.ToString(),
+                    Text = skill.Value.name,
+                    Group = categoryList[skill.Value.category]
+                });
+
+            var result = new[] { defaultSelectListItem }.Concat(selectListItems).ToArray();
+
+            return result;
+        }
+
         /// <summary>
         /// 選択肢として表示される技名称リスト
         /// </summary>
-        protected readonly Dictionary<int, string> _skillNameList;
+        readonly Dictionary<int, string> _skillNameList;
         /// <summary>
         /// 選択肢として表示される技名称リスト
         /// </summary>
-        public SelectListItem[] skillNameList
-            => _skillNameList
-            .OrderBy(name => name.Value)
-            .ThenBy(name => name.Key)
-            .Select(name => new SelectListItem { Value = name.Key.ToString(), Text = name.Value })
-            .ToArray();
+        public SelectListItem[] skillSelectList { get; }
 
         /// <summary>
         /// 追加技のデフォルト選択ID

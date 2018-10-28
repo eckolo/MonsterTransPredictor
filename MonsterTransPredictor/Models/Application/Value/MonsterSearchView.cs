@@ -12,7 +12,7 @@ namespace MonsterTransPredictor.Models.Application.Value
     public class MonsterSearchView : BaseSearchView
     {
         public MonsterSearchView(
-            Dictionary<int, string> skillNameList,
+            Dictionary<int, (PartsType category, string name)> skillNameList,
             Dictionary<int, string> monsterNameList,
             Monster absorbMonster = null,
             Skill[] masteredSkillList = null,

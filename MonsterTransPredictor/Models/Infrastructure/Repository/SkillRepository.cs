@@ -1,5 +1,6 @@
 ﻿using MonsterTransPredictor.Models.Application.Entity;
 using MonsterTransPredictor.Models.Application.Repository;
+using MonsterTransPredictor.Models.Application.Value;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,8 +15,8 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
         /// 全技データのIDと名称のセットを取得する
         /// </summary>
         /// <returns>全技データのIDと名称のセット</returns>
-        Dictionary<int, string> ISkillRepository.GetAllNameList()
-            => MtpRepository.entity.skills.ToDictionary(skill => skill.id, skill => skill.name);
+        Dictionary<int, (PartsType category, string name)> ISkillRepository.GetAllNameList()
+            => MtpRepository.entity.skills.ToDictionary(skill => skill.id, skill => (skill.partsType, skill.name));
 
         /// <summary>
         /// 指定したIDの技情報を取得する
