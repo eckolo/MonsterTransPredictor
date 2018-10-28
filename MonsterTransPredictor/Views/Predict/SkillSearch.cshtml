@@ -9,7 +9,7 @@
         @Html.Partial("_MasteredSkills", Model)
         <div class="panel-heading lead">新規習得技</div>
         <div class="panel-body">
-            @Html.DropDownListFor(Model => Model.addSkillId, Model.skillNameList, new { @class = "form-control" })
+            @Html.DropDownListFor(Model => Model.addSkillId, Model.skillSelectList, new { @class = "form-control" })
         </div>
         @Html.Partial("_Search")
     }

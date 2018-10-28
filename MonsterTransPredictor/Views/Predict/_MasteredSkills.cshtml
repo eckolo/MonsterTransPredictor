@@ -5,7 +5,7 @@
     @for(int index = 0; index < Model.masteredSkillIdList.Length; index++)
     {
         <li class="list-group-item row">
-            @Html.DropDownListFor(_ => Model.masteredSkillIdList[index], Model.skillNameList, new { @class = "form-control", @style = "display: inline" })
+            @Html.DropDownListFor(_ => Model.masteredSkillIdList[index], Model.skillSelectList, new { @class = "form-control", @style = "display: inline" })
             <span id="@Model.GetSwapButtonId(index)" class="btn btn-primary @Model.swapClass">入替</span>
         </li>
     }
