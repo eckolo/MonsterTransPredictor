@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="Controllers\PredictControllerTests.cs" />
     <Compile Include="Models\Application\Service\EnumerableManagerTests.cs" />
+    <Compile Include="Models\Application\Service\PartsTypeServiceTests.cs" />
     <Compile Include="Models\Application\Value\HpTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
