@@ -18,8 +18,8 @@
         /// </summary>
         public const string NOT_TRANS_NAME = "※変身無し※";
         /// <summary>
-        /// 変身先モンスター無しの場合の表記
+        /// アクセストークンクッキーのキー
         /// </summary>
-        public const string ACCESS_COOKIE_KEY = "mtp_token";
+        public const string ACCESS_COOKIE_KEY = "mtpauth";
     }
 }

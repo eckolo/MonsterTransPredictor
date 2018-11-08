@@ -26,10 +26,10 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
 
         static string ToUniqueId(this DateTime seed)
         {
-            var hash = seed.GetHashCode();
+            var hash = seed.GetHashCode().ToString("x");
             var guid = Guid.NewGuid().ToString();
 
-            return $"{hash}{guid}";
+            return $"{guid}-{hash}";
         }
     }
 }
