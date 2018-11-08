@@ -3,6 +3,7 @@ using MonsterTransPredictor.Models.Application.Service;
 using MonsterTransPredictor.Models.Application.Value;
 using MonsterTransPredictor.Models.Infrastructure.Repository;
 using MonsterTransPredictor.Models.Infrastructure.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -25,12 +26,17 @@ namespace MonsterTransPredictor.Controllers
         readonly ISkillRepository skillRepository = new SkillRepository();
 
         /// <summary>
+        /// 処理開始時刻
+        /// </summary>
+        readonly DateTime processStart = DateTime.Now;
+
+        /// <summary>
         /// トップページ兼メインメニュー
         /// </summary>
         /// <returns>HTMLページ</returns>
         public ActionResult Index()
         {
-            Response.Cookies.Add(Request.ToAccessCookie());
+            Response.Cookies.Add(Request.ToAccessCookie(processStart));
 
             return View();
         }
@@ -42,7 +48,7 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult SkillSearch(List<int?> masteredSkillIdList = null, int? addSkillId = null)
         {
-            Response.Cookies.Add(Request.ToAccessCookie());
+            Response.Cookies.Add(Request.ToAccessCookie(processStart));
 
             var skillNameList = skillRepository.GetAllNameList();
 
@@ -65,7 +71,7 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult MonsterSearch(List<int?> masteredSkillIdList = null, int? absorbMonsterId = null)
         {
-            Response.Cookies.Add(Request.ToAccessCookie());
+            Response.Cookies.Add(Request.ToAccessCookie(processStart));
 
             var skillNameList = skillRepository.GetAllNameList();
             var monsterNameList = monsterRepository.GetAllNameList();
