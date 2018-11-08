@@ -11,11 +11,27 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
     public static class CookieService
     {
         /// <summary>
+        /// アクセストークンを生成しアクセスログを記録する
+        /// </summary>
+        /// <param name="response">レスポンスオブジェクト</param>
+        /// <param name="request">リクエストオブジェクト</param>
+        /// <param name="accessTime">アクセス時刻</param>
+        public static void RecordAccessLog(
+            this HttpResponseBase response,
+            HttpRequestBase request,
+            DateTime accessTime)
+        {
+            var token = request.ToAccessToken(accessTime);
+
+            response.Cookies.Add(token);
+        }
+
+        /// <summary>
         /// リクエストオブジェクトから1度以上アクセスしたユーザーか否か判定してアクセスクッキーを生成する
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public static HttpCookie ToAccessCookie(this HttpRequestBase request, DateTime seed)
+        static HttpCookie ToAccessToken(this HttpRequestBase request, DateTime seed)
         {
             var cookies = request.Cookies;
             if(cookies.AllKeys.Contains(Const.ACCESS_COOKIE_KEY)) return cookies[Const.ACCESS_COOKIE_KEY];

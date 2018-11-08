@@ -36,7 +36,7 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult Index()
         {
-            Response.Cookies.Add(Request.ToAccessCookie(processStart));
+            Response.RecordAccessLog(Request, processStart);
 
             return View();
         }
@@ -48,7 +48,7 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult SkillSearch(List<int?> masteredSkillIdList = null, int? addSkillId = null)
         {
-            Response.Cookies.Add(Request.ToAccessCookie(processStart));
+            Response.RecordAccessLog(Request, processStart);
 
             var skillNameList = skillRepository.GetAllNameList();
 
@@ -71,7 +71,7 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult MonsterSearch(List<int?> masteredSkillIdList = null, int? absorbMonsterId = null)
         {
-            Response.Cookies.Add(Request.ToAccessCookie(processStart));
+            Response.RecordAccessLog(Request, processStart);
 
             var skillNameList = skillRepository.GetAllNameList();
             var monsterNameList = monsterRepository.GetAllNameList();
