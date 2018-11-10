@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace MonsterTransPredictor.Models.Infrastructure.Service
+namespace MonsterTransPredictor.Models.Application.Service
 {
     /// <summary>
     /// Cookie関連の計算処理用サービス

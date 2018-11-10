@@ -2,7 +2,6 @@
 using MonsterTransPredictor.Models.Application.Service;
 using MonsterTransPredictor.Models.Application.Value;
 using MonsterTransPredictor.Models.Infrastructure.Repository;
-using MonsterTransPredictor.Models.Infrastructure.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
