@@ -15,18 +15,27 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
         /// 全技データのIDと名称のセットを取得する
         /// </summary>
         /// <returns>全技データのIDと名称のセット</returns>
-        Dictionary<int, (PartsType category, string name)> ISkillRepository.GetAllNameList()
-            => MtpRepository.entity.skills.ToDictionary(skill => skill.id, skill => (skill.partsType, skill.name));
+        public Dictionary<int, (PartsType category, string name)> GetAllNameList()
+        {
+            using(var entity = MtpRepository.entity)
+            {
+                return MtpRepository.entity.skills
+                    .ToDictionary(skill => skill.id, skill => (skill.partsType, skill.name));
+            }
+        }
 
         /// <summary>
         /// 指定したIDの技情報を取得する
         /// </summary>
         /// <param name="ids">IDのリスト</param>
         /// <returns>技情報一覧</returns>
-        IEnumerable<Skill> ISkillRepository.GetSkill(IEnumerable<int> ids)
+        public IEnumerable<Skill> GetSkill(IEnumerable<int> ids)
         {
             var idList = ids ?? new List<int>();
-            return MtpRepository.entity.skills.Where(skill => idList.Contains(skill.id)).ToList();
+            using(var entity = MtpRepository.entity)
+            {
+                return entity.skills.Where(skill => idList.Contains(skill.id)).ToList();
+            }
         }
     }
 }

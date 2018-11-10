@@ -16,7 +16,12 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
         /// </summary>
         /// <returns>全モンスターデータのIDと名称のセット</returns>
         public Dictionary<int, string> GetAllNameList()
-            => MtpRepository.entity.monsters.ToDictionary(monster => monster.id, monster => monster.name);
+        {
+            using(var entity = MtpRepository.entity)
+            {
+                return entity.monsters.ToDictionary(monster => monster.id, monster => monster.name);
+            }
+        }
 
         /// <summary>
         /// 指定したIDのモンスター情報を取得する
@@ -24,9 +29,14 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
         /// <param name="id">ID</param>
         /// <returns>モンスター情報</returns>
         public Monster GetMonster(int? id)
-            => MtpRepository.entity.monsters
-                .Where(monster => monster.id == id)
-                .Include(monster => monster.learnableSkillList)
-                .SingleOrDefault();
+        {
+            using(var entity = MtpRepository.entity)
+            {
+                return entity.monsters
+                    .Where(monster => monster.id == id)
+                    .Include(monster => monster.learnableSkillList)
+                    .SingleOrDefault();
+            }
+        }
     }
 }

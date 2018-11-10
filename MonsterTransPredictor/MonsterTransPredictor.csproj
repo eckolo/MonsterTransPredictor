@@ -172,6 +172,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811100425101_AddAccessLogs.cs" />
+    <Compile Include="Migrations\201811100425101_AddAccessLogs.Designer.cs">
+      <DependentUpon>201811100425101_AddAccessLogs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Initial.cs" />
     <Compile Include="Migrations\Initial.Designer.cs">
       <DependentUpon>Initial.cs</DependentUpon>
@@ -179,6 +183,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Application\Entity\TransTerm.Configuration.cs" />
     <Compile Include="Models\Application\Entity\TransTerm.cs" />
+    <Compile Include="Models\Application\Repository\IAccessLogRepository.cs" />
     <Compile Include="Models\Application\Repository\IMonsterRepository.cs" />
     <Compile Include="Models\Application\Repository\ISkillRepository.cs" />
     <Compile Include="Models\Application\Repository\ITransTermRepository.cs" />
@@ -188,6 +193,7 @@
     <Compile Include="Models\Application\Service\PartsTypeService.cs" />
     <Compile Include="Models\Application\Service\SkillService.cs" />
     <Compile Include="Models\Application\Service\StatusCalculator.cs" />
+    <Compile Include="Models\Application\Value\AccessLog.cs" />
     <Compile Include="Models\Application\Value\BaseSearchView.cs" />
     <Compile Include="Models\Application\Value\Const.cs" />
     <Compile Include="Models\Application\Value\Hp.cs" />
@@ -196,7 +202,9 @@
     <Compile Include="Models\Application\Value\PartsType.cs" />
     <Compile Include="Models\Application\Entity\Skill.cs" />
     <Compile Include="Models\Application\Value\SkillSearchView.cs" />
+    <Compile Include="Models\Infrastructure\Repository\AccessLogRepository.cs" />
     <Compile Include="Models\Infrastructure\Repository\MonsterRepository.cs" />
+    <Compile Include="Models\Infrastructure\Service\CookieService.cs" />
     <Compile Include="Models\Infrastructure\Service\DbInitializer.cs" />
     <Compile Include="Models\Infrastructure\Service\DbInitializer.Monsters.cs" />
     <Compile Include="Models\Infrastructure\Service\DbInitializer.Skills.cs" />
@@ -274,6 +282,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811100425101_AddAccessLogs.resx">
+      <DependentUpon>201811100425101_AddAccessLogs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\Initial.resx">
       <DependentUpon>Initial.cs</DependentUpon>
     </EmbeddedResource>

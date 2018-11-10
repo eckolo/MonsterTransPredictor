@@ -1,6 +1,7 @@
 ﻿namespace MonsterTransPredictor.Models.Infrastructure
 {
     using MonsterTransPredictor.Models.Application.Entity;
+    using MonsterTransPredictor.Models.Application.Value;
     using System.Data.Entity;
 
     public class Mtp : DbContext
@@ -24,6 +25,8 @@
         public virtual DbSet<Skill> skills { get; set; }
 
         public virtual DbSet<TransTerm> transTerms { get; set; }
+
+        public virtual DbSet<AccessLog> accessLogs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

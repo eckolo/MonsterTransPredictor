@@ -2,6 +2,8 @@
 using MonsterTransPredictor.Models.Application.Service;
 using MonsterTransPredictor.Models.Application.Value;
 using MonsterTransPredictor.Models.Infrastructure.Repository;
+using MonsterTransPredictor.Models.Infrastructure.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -22,6 +24,15 @@ namespace MonsterTransPredictor.Controllers
         /// 技情報リポジトリ
         /// </summary>
         readonly ISkillRepository skillRepository = new SkillRepository();
+        /// <summary>
+        /// アクセスログリポジトリ
+        /// </summary>
+        readonly IAccessLogRepository accessLogRepository = new AccessLogRepository();
+
+        /// <summary>
+        /// 処理開始時刻
+        /// </summary>
+        readonly DateTime processStart = DateTime.Now;
 
         /// <summary>
         /// トップページ兼メインメニュー
@@ -29,6 +40,8 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult Index()
         {
+            accessLogRepository.RecordAccessLog(Response, Request, processStart);
+
             return View();
         }
         /// <summary>
@@ -39,6 +52,8 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult SkillSearch(List<int?> masteredSkillIdList = null, int? addSkillId = null)
         {
+            accessLogRepository.RecordAccessLog(Response, Request, processStart);
+
             var skillNameList = skillRepository.GetAllNameList();
 
             var skillIdList = masteredSkillIdList?.Concat(new List<int?> { addSkillId }).ToIdList();
@@ -60,6 +75,8 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult MonsterSearch(List<int?> masteredSkillIdList = null, int? absorbMonsterId = null)
         {
+            accessLogRepository.RecordAccessLog(Response, Request, processStart);
+
             var skillNameList = skillRepository.GetAllNameList();
             var monsterNameList = monsterRepository.GetAllNameList();
 

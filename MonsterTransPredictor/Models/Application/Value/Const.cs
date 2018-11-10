@@ -17,5 +17,9 @@
         /// 変身先モンスター無しの場合の表記
         /// </summary>
         public const string NOT_TRANS_NAME = "※変身無し※";
+        /// <summary>
+        /// アクセストークンクッキーのキー
+        /// </summary>
+        public const string ACCESS_COOKIE_KEY = "mtpauth";
     }
 }

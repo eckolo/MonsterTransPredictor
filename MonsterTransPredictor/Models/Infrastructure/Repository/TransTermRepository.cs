@@ -17,11 +17,14 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
         public IEnumerable<TransTerm> GetTransTerms(List<Skill> skills, bool special = false)
         {
             var skillIdList = skills.Select(_skill => _skill.id).ToList();
-            return MtpRepository.entity.transTerms
-                .Where(term => term.necessarySkillList.All(skill => skillIdList.Contains(skill.id)))
-                .Where(term => term.special == special)
-                .Include(term => term.monster)
-                .ToList();
+            using(var entity = MtpRepository.entity)
+            {
+                return entity.transTerms
+                    .Where(term => term.necessarySkillList.All(skill => skillIdList.Contains(skill.id)))
+                    .Where(term => term.special == special)
+                    .Include(term => term.monster)
+                    .ToList();
+            }
         }
     }
 }
