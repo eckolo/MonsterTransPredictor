@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace MonsterTransPredictor.Models.Infrastructure.Service
+namespace MonsterTransPredictor.Models.Application.Service
 {
     /// <summary>
     /// Cookie関連の計算処理用サービス
@@ -55,7 +55,12 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
             if(cookies.AllKeys.Contains(Const.ACCESS_COOKIE_KEY)) return cookies[Const.ACCESS_COOKIE_KEY];
 
             var uniqueId = seed.ToUniqueId();
-            return new HttpCookie(Const.ACCESS_COOKIE_KEY, uniqueId);
+            var cookie = new HttpCookie(Const.ACCESS_COOKIE_KEY, uniqueId)
+            {
+                Expires = DateTime.MaxValue,
+                HttpOnly = true
+            };
+            return cookie;
         }
 
         static string ToUniqueId(this DateTime seed)
