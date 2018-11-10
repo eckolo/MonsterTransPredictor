@@ -1,5 +1,5 @@
-﻿using MonsterTransPredictor.Models.Application.Value;
-using MonsterTransPredictor.Models.Infrastructure.Repository;
+﻿using MonsterTransPredictor.Models.Application.Repository;
+using MonsterTransPredictor.Models.Application.Value;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -16,11 +16,13 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
         /// <summary>
         /// アクセストークンを生成しアクセスログを記録する
         /// </summary>
+        /// <param name="accessLogRepository">アクセスログリポジトリ</param>
         /// <param name="response">レスポンスオブジェクト</param>
         /// <param name="request">リクエストオブジェクト</param>
         /// <param name="accessTime">アクセス時刻</param>
         public static void RecordAccessLog(
-            this HttpResponseBase response,
+            this IAccessLogRepository accessLogRepository,
+            HttpResponseBase response,
             HttpRequestBase request,
             DateTime accessTime)
         {
@@ -35,11 +37,7 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
 
                 var accessLog = new AccessLog(accessTime, token, path, param);
 
-                using(var entity = MtpRepository.entity)
-                {
-                    entity.accessLogs.Add(accessLog);
-                    entity.SaveChanges();
-                }
+                accessLogRepository.LeaveLog(accessLog);
             }
 
             //値渡ししたオブジェクトへの非staticな操作してるけどメソッドに切り出すためにはしょうがなかったの許して

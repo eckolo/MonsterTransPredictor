@@ -24,6 +24,10 @@ namespace MonsterTransPredictor.Controllers
         /// 技情報リポジトリ
         /// </summary>
         readonly ISkillRepository skillRepository = new SkillRepository();
+        /// <summary>
+        /// アクセスログリポジトリ
+        /// </summary>
+        readonly IAccessLogRepository accessLogRepository = new AccessLogRepository();
 
         /// <summary>
         /// 処理開始時刻
@@ -36,7 +40,7 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult Index()
         {
-            Response.RecordAccessLog(Request, processStart);
+            accessLogRepository.RecordAccessLog(Response, Request, processStart);
 
             return View();
         }
@@ -48,7 +52,7 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult SkillSearch(List<int?> masteredSkillIdList = null, int? addSkillId = null)
         {
-            Response.RecordAccessLog(Request, processStart);
+            accessLogRepository.RecordAccessLog(Response, Request, processStart);
 
             var skillNameList = skillRepository.GetAllNameList();
 
@@ -71,7 +75,7 @@ namespace MonsterTransPredictor.Controllers
         /// <returns>HTMLページ</returns>
         public ActionResult MonsterSearch(List<int?> masteredSkillIdList = null, int? absorbMonsterId = null)
         {
-            Response.RecordAccessLog(Request, processStart);
+            accessLogRepository.RecordAccessLog(Response, Request, processStart);
 
             var skillNameList = skillRepository.GetAllNameList();
             var monsterNameList = monsterRepository.GetAllNameList();
