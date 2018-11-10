@@ -35,10 +35,10 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
 
                 var accessLog = new AccessLog(accessTime, token, path, param);
 
-                using(var mtp = MtpRepository.entity)
+                using(var entity = MtpRepository.entity)
                 {
-                    mtp.accessLogs.Add(accessLog);
-                    mtp.SaveChanges();
+                    entity.accessLogs.Add(accessLog);
+                    entity.SaveChanges();
                 }
             }
 
