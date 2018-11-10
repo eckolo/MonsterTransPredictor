@@ -8,9 +8,8 @@ namespace MonsterTransPredictor.Models.Application.Value
     /// </summary>
     public class AccessLog
     {
-        public AccessLog(long counter, DateTime accessTime, string token, string path, string param)
+        public AccessLog(DateTime accessTime, string token, string path, string param)
         {
-            this.counter = counter;
             this.accessTime = accessTime;
             this.token = token ?? throw new ArgumentNullException(nameof(token));
             this.path = path ?? throw new ArgumentNullException(nameof(path));

@@ -1,5 +1,8 @@
 ﻿using MonsterTransPredictor.Models.Application.Value;
+using MonsterTransPredictor.Models.Infrastructure.Repository;
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -21,9 +24,26 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
             HttpRequestBase request,
             DateTime accessTime)
         {
-            var token = request.ToAccessToken(accessTime);
+            var cookie = request.ToAccessToken(accessTime);
 
-            response.Cookies.Add(token);
+            request.InputStream.Position = 0;
+            using(var reader = new StreamReader(request.InputStream))
+            {
+                var token = cookie.Value;
+                var path = request.RawUrl;
+                var param = HttpUtility.UrlDecode(reader.ReadToEnd());
+
+                var accessLog = new AccessLog(accessTime, token, path, param);
+
+                using(var mtp = MtpRepository.entity)
+                {
+                    mtp.accessLogs.Add(accessLog);
+                    mtp.SaveChanges();
+                }
+            }
+
+            //値渡ししたオブジェクトへの非staticな操作してるけどメソッドに切り出すためにはしょうがなかったの許して
+            response.Cookies.Add(cookie);
         }
 
         /// <summary>
@@ -42,6 +62,9 @@ namespace MonsterTransPredictor.Models.Infrastructure.Service
 
         static string ToUniqueId(this DateTime seed)
         {
+            //デバッグ実行であることを明示的にログを残す
+            if(Debugger.IsAttached) return "DEBUG";
+
             var hash = seed.GetHashCode().ToString("x");
             var guid = Guid.NewGuid().ToString();
 

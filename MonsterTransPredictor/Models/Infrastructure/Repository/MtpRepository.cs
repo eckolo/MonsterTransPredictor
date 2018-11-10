@@ -9,13 +9,9 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
     public static class MtpRepository
     {
         /// <summary>
-        /// エンティティの実体
-        /// </summary>
-        static Mtp _entity = null;
-        /// <summary>
         /// エンティティ取得インターフェース
         /// </summary>
-        public static Mtp entity => _entity ?? (_entity = new Mtp().SetLog());
+        public static Mtp entity => new Mtp().SetLog();
 
         /// <summary>
         /// DBアクセスログをコンソールに吐き出すための処理
@@ -25,16 +21,8 @@ namespace MonsterTransPredictor.Models.Infrastructure.Repository
         /// <returns>渡したエンティティ</returns>
         private static TContext SetLog<TContext>(this TContext dbContext) where TContext : DbContext
         {
-            dbContext.Database.Log = ShowWindowsMessage;
+            dbContext.Database.Log = message => Debug.WriteLine(message);
             return dbContext;
-        }
-        /// <summary>
-        /// コンソールへの標準出力処理をデリゲートとして渡すためのラッパー
-        /// </summary>
-        /// <param name="message">コンソールへ出力する文字列</param>
-        private static void ShowWindowsMessage(string message)
-        {
-            Debug.WriteLine(message);
         }
     }
 }
